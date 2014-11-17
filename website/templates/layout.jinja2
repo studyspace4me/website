@@ -1,0 +1,179 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Study Space For Me{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ 'website:static/css/foundation.css' | static_url }}" />
+{#    <link rel="stylesheet" href="{{ request.application_url }}/static/css/foundation.css" />#}
+    <script src="{{ 'website:static/js/vendor/modernizr.js' | static_url }}"></script>
+
+    <!--MAP-->
+    <style type="text/css">
+        #map{
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+
+
+    </style>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&language=it"></script>
+    <script type="text/javascript">
+        function initialize() {
+            // Create an array of styles.
+            var styles = [
+                {
+                    stylers: [
+                        { hue: "#fcf505" },
+                        { saturation: -25 }
+                    ]
+                },{
+                    featureType: "all",
+                    elementType: "labels",
+                    stylers: [
+                        { visibility: "off" }
+                    ]
+                },
+                {
+                    featureType: "road",
+                    elementType: "geometry",
+                    stylers: [
+                        { lightness: 95 },
+                        { visibility: "simplified" }
+                    ]
+                },{
+                    featureType: "administrative.locality",
+                    elementType: "labels",
+                    stylers: [
+                        { visibility: "on" }
+                    ]
+                },
+                {
+                    featureType: "road",
+                    elementType: "labels.text",
+                    stylers: [
+                        { visibility: "on" }
+                    ]
+                }
+            ];
+
+            // Create a new StyledMapType object, passing it the array of styles,
+            // as well as the name to be displayed on the map type control.
+            var styledMap = new google.maps.StyledMapType(styles,
+                    {name: "Study Space For Me"});
+
+            // Create a map object, and include the MapTypeId to add
+            // to the map type control.
+            var trento = new  google.maps.LatLng(46.0804614,11.1203557);
+            var mapOptions = {
+                center: trento,
+                zoom: 12,
+                mapTypeControlOptions: {
+                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'stile']
+                }
+            };
+
+            var map = new google.maps.Map(document.getElementById('map'),
+                    mapOptions);
+
+            var groundFloor=new google.maps.KmlLayer({
+                url: 'https://sites.google.com/site/publickmlstorage/files/gfloor.kml',
+                preserveViewport: true,
+                suppressInfoWindows:false
+            });
+            groundFloor.setMap(map);
+            //Associate the styled map with the MapTypeId and set it to display.
+            map.mapTypes.set('stile', styledMap);
+            map.setMapTypeId('stile');
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+</head>
+<body>
+<div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+        <nav class="tab-bar">
+            <section class="left">
+                <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+            </section>
+
+            <section class="middle tab-bar-section">
+                <h1 class="title">Study Space For Me</h1>
+            </section>
+        </nav>
+
+        <aside class="left-off-canvas-menu">
+            <ul class="off-canvas-list">
+                <li><label>Studyspace4.me</label></li>
+            <span id="beforeLogin">
+              <li id="loginButton"><a href="{{ request.route_url('login') }}">Login</a></li>
+              <li id="signUpButton"><a href="{{ request.route_url('register') }}">Sign up</a></li>
+            </span>
+            <span id="afterLogin">
+              <li id="dashboardButton"><a href="{{ request.route_url('dashboard') }}">Dashboard</a></li>
+              <li id="settingsButton"><a href="{{ request.route_url('settings') }}">Settings</a></li>
+              <li id="contributeButton"><a>Contribute</a></li>
+                <li id="termsofuseButton"><a>Terms of use</a></li>
+              <li id="logout"><a href="{{ request.route_url('logout') }}">Logout</a></li>
+            </span>
+            </ul>
+        </aside>
+        <section class="main-section">
+            {% block content %}{% endblock %}
+        </section>
+        <!--FOUNDATION & CO-->
+        <script src="{{ 'website:static/js/vendor/jquery.js' | static_url }}"></script>
+        <script src="{{ 'website:static/js/foundation.min.js' | static_url }}"></script>
+        <script src="{{ 'website:static/js/foundation/foundation.orbit.js' | static_url }}"></script>
+        <script>
+            $(document).foundation();
+        </script>
+
+        <!--PAGE-->
+        <script src="{{ 'website:static/js/jquery-1.11.1.min.js' | static_url }}"></script>
+        <script>
+            $( document ).ready(function() {
+                $("#loginSubmit").click( function(event){
+                    $( "#loginForm" ).submit();
+                });
+
+                $("#signupSubmit").click( function(event){
+                    $( "#signupForm" ).submit();
+                });
+
+                $("#settingsSubmit").click( function(event){
+                    $( "#settingsForm" ).submit();
+                });
+
+                //MECHANICS ANIMATIONS
+                //TODO: NEED TO SET INITIAL STATE OF THE BUTTONS AND OF THE VISIBILITY OF THE SLIDING PANELS
+
+                $("#headerResult").click( function(event){
+                    $("#resultX").slideToggle();
+                    if($("#headerButton").text() == "More info"){
+                        $("#headerButton").text("Less info");
+                        $(".summaryHeader").hide();
+                    }
+                    else{
+                        $("#headerButton").text("More info");
+                        $(".summaryHeader").show();
+                    }
+                });
+
+                $("#mapButton").click( function(event){
+                    $("#mapContainer").slideToggle();
+                    if($("#mapButton").text() == "Click to view")
+                    //to perserve style
+                        $("#mapButton").html($("#mapButton").html().replace("Click to view", "Click to hide"));
+                    else
+                        $("#mapButton").html($("#mapButton").html().replace("Click to hide", "Click to view"));
+                });
+            });
+        </script>
+
+</body>
+</html>

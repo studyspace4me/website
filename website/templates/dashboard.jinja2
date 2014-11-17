@@ -1,0 +1,163 @@
+{% extends "layout.jinja2" %}
+
+{% block title %}Dashboard - {{ super() }}{% endblock %}
+
+{% block content %}
+    <div class="content" style="height:100%; overflow:scoll;">
+        <br>
+        <div id="dashboardSection">
+
+            <!--ALERTS-->
+            <div class="row">
+                <div class="small-12 large-centered columns">
+                    <div data-alert class="alert-box info radius">
+                        Hi <span id="studentName">{{ full_name }}</span>! Welcome to your dashboard.
+                      <a href="#" class="close">&times;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!--SEARCH-->
+            <div class="row">
+                <div class="small-12 large-centered columns">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-3 columns">
+                            <span class="prefix">Search</span>
+                        </div>
+                        <div class="small-6 columns">
+                            <input type="text" placeholder="for a study space..." required>
+                        </div>
+                        <div class="small-3 columns end">
+                            <a class="button alert postfix" href="#">GO</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--ORDER BY-->
+            <div class="row">
+                <div class="small-12 large-centered columns">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-3 columns">
+                            <span class="prefix">Order By</span>
+                        </div>
+                        <div class="small-9 columns">
+                            <select>
+                                <option value="All">All</option>
+                                <option value="Temperature">Temperature</option>
+                                <option value="Nearest">Nearest</option>
+                                <option value="Favorites">Favorites</option>
+                                <option value="Crowding">Crowding</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--HEADER-->
+            <div class="row" id="headerResult">
+                <div class="small-12 large-centered columns">
+                    <div class="panel" style="background: #313131; border-radius: 10px; border-width:1px; border-color:black;">
+                        <div class="row" style="color:white">
+
+                            <div class="medium-2 columns">
+                                <img src="{{ 'website:static/images/icon.png' | static_url }}" width="20px" height="20px" id="headerIcon"><img>
+                                &nbsp;
+                                <strong>
+                            <span id="spaceName">
+                              B106
+                            </span>
+                                </strong>
+                            </div>
+
+                            <!--HIDE WHEN CLICKED-->
+                            <!--creating a span with id="summaryHeader" doesn't work-->
+                            <div class="medium-2 columns summaryHeader">
+                          <span id="location">
+                            Povo A, 1st Floor
+                          </span>
+                            </div>
+
+                            <!--HIDE WHEN CLICKED-->
+                            <div class="medium-5 columns summaryHeader">
+                                <!--FULL=alert, AVG=warning, FREE=success-->
+                                <span style="font-size:11px;">Status:</span>
+                                <label class="alert radius label" id="headerStatus">Full</label>
+                            </div>
+
+                            <div class="medium-2 columns end">
+                                <label style="color:white" id="headerButton">Less info</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--RESULTS-->
+            <div class="row" id="resultX">
+                <div class="small-12 large-centered columns">
+                    <div class="panel">
+                        <div class="row">
+
+                            <!--TODO: Doesn't work!!!-->
+                            <div class="small-12 small-centered columns" id="mapContainer">
+                                <div id="flex-video">
+                                    <iframe id="map">
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <div class="small-12 large-centered columns">
+                                <label class="secondary radius label" style="background-color:transparent; color:black;"><strong>Info:</strong></label>
+                            </div>
+
+                            <div class="small-12 large-centered columns">
+                                <label class="secondary radius label">Location: </label>
+                                &nbsp;<label class="radius label" style="background-color:gray" id="locationName">Povo A, 1st Floor</label>
+                            </div>
+
+                            <!--I think it doesn't need a description because there already an image that describes it-->
+                            <!--<div class="small-12 large-centered columns">
+                              <label class="secondary radius label">Description: </label><span style="font-size:12px" id="description">&nbsp;"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</span>
+                            </div>-->
+
+                            <div class="small-12 large-centered columns">
+                                <!--FULL=alert, AVG=warning, FREE=success-->
+                                <label class="secondary radius label">Status:</label>
+                                &nbsp;<label class="alert radius label" id="status">Full</label>
+                            </div>
+
+                            <div class="small-12 large-centered columns">
+                                <!--COLD=[leave empty], NORMAL=success, AVG_NORM_HOT=warning, HOT="alert"-->
+                                <label class="secondary radius label">Temperature:</label>
+                                &nbsp;<label class="success radius label" id="temperature">21°</label>
+                            </div>
+
+                            <div class="small-12 large-centered columns">
+                                <!--TODO: give a nice click effect-->
+                                <label class="secondary radius label">Map:</label>
+                                &nbsp;<label class="secondary radius label" id="mapButton"><a>Click to hide</a></label>
+                            </div>
+
+                            <div class="small-12 large-centered columns">
+                                <label class="secondary radius label" style="background-color:transparent; color:black;"><strong>Pictures:</strong></label>
+                            </div>
+
+                            <div class="small-12 columns">
+                                <ul class="clearing-thumbs" data-clearing="" style="">
+                                    <li>
+                                        <a class="th" href="{{ 'website:static/images/picture.png' | static_url }}">
+                                            <img data-caption="This a test." src="{{ 'website:static/images/thumbnail.png' | static_url }}">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -14,9 +14,15 @@ def main(global_config, **settings):
     config.add_translation_dirs('locale/')
     config.include('pyramid_jinja2')
 
-    config.add_static_view('static', 'static')
-    config.add_view('website.views.my_view',
-                    context='website.models.MyModel', 
-                    renderer="templates/mytemplate.jinja2")
+    config.add_static_view(name='static', path='static')
+    config.add_route('dashboard', '/')
+    config.add_route('login', '/login/')
+    config.add_route('logout', '/logout/')
+    config.add_route('register', '/register/')
+    config.add_route('settings', '/settings/')
+    config.add_view('website.views.dashboard', renderer="templates/dashboard.jinja2", route_name='dashboard')
+    config.add_view('website.views.login', renderer="templates/login.jinja2", route_name='login')
+    config.add_view('website.views.register', renderer="templates/register.jinja2", route_name='register')
+    config.add_view('website.views.settings', renderer="templates/settings.jinja2", route_name='settings')
 
     return config.make_wsgi_app()
