@@ -13,7 +13,7 @@ requires = ['pyramid',
             'waitress']
 
 setup(name='website',
-      version='0.0',
+      version='0.2',
       description='website',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[

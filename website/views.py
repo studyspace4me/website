@@ -15,5 +15,13 @@ def register(request):
     return {}
 
 
-def settings(request):
+def preferences(request):
+    return {}
+
+
+def contribute(request):
+    return {}
+
+
+def terms(request):
     return {}

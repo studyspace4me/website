@@ -2,57 +2,159 @@
 
 {% block title %}Dashboard - {{ super() }}{% endblock %}
 
+{% block css %}
+    {{ super() }}
+    <!--MAP-->
+    <style type="text/css">
+        #map {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #selectedOrderby {
+            background-color: rgb(0, 140, 186);
+        }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&language=it"></script>
+    <script type="text/javascript">
+        function initialize() {
+            // Create an array of styles.
+            var styles = [
+                {
+                    stylers: [
+                        { hue: "#fcf505" },
+                        { saturation: -25 }
+                    ]
+                },{
+                    featureType: "all",
+                    elementType: "labels",
+                    stylers: [
+                        { visibility: "off" }
+                    ]
+                },
+                {
+                    featureType: "road",
+                    elementType: "geometry",
+                    stylers: [
+                        { lightness: 95 },
+                        { visibility: "simplified" }
+                    ]
+                },{
+                    featureType: "administrative.locality",
+                    elementType: "labels",
+                    stylers: [
+                        { visibility: "on" }
+                    ]
+                },
+                {
+                    featureType: "road",
+                    elementType: "labels.text",
+                    stylers: [
+                        { visibility: "on" }
+                    ]
+                }
+            ];
+
+            // Create a new StyledMapType object, passing it the array of styles,
+            // as well as the name to be displayed on the map type control.
+            var styledMap = new google.maps.StyledMapType(styles,
+                    {name: "StudySpace4Me"});
+
+            // Create a map object, and include the MapTypeId to add
+            // to the map type control.
+            var trento = new  google.maps.LatLng(46.0804614,11.1203557);
+            var mapOptions = {
+                center: trento,
+                zoom: 12,
+                mapTypeControlOptions: {
+                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'stile']
+                }
+            };
+
+            var map = new google.maps.Map(document.getElementById('map'),
+                    mapOptions);
+
+            var groundFloor=new google.maps.KmlLayer({
+                url: 'https://sites.google.com/site/publickmlstorage/files/gfloor.kml',
+                preserveViewport: true,
+                suppressInfoWindows:false
+            });
+            groundFloor.setMap(map);
+            //Associate the styled map with the MapTypeId and set it to display.
+            map.mapTypes.set('stile', styledMap);
+            map.setMapTypeId('stile');
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+{% endblock %}
+
+{% block urgentjs %}
+    {{ super() }}
+{% endblock %}
+
+{% block js %}
+    {{ super() }}
+{% endblock %}
+
 {% block content %}
-    <div class="content" style="height:100%; overflow:scoll;">
-        <br>
-        <div id="dashboardSection">
+    <div id="dashboardSection">
 
-            <!--ALERTS-->
-            <div class="row">
-                <div class="small-12 large-centered columns">
-                    <div data-alert class="alert-box info radius">
-                        Hi <span id="studentName">{{ full_name }}</span>! Welcome to your dashboard.
-                      <a href="#" class="close">&times;</a>
+        <!--ALERTS-->
+        <div class="row">
+            <div class="small-12 large-centered columns">
+                <div data-alert class="alert-box info radius">
+                    Hi <span id="studentName">!</span> Welcome to your dashboard.
+                    <a href="#" class="close">&times;</a>
+                </div>
+            </div>
+        </div>
+
+        <!--SEARCH-->
+        <div class="row">
+            <div class="small-12 large-centered columns">
+                <div class="row collapse prefix-radius">
+                    <div class="small-3 columns">
+                        <span class="prefix">Search</span>
+                    </div>
+                    <div class="small-6 columns">
+                        <input type="text" placeholder="for a study space..." required>
+                    </div>
+                    <div class="small-3 columns end">
+                        <a class="button postfix" href="#">GO</a>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!--SEARCH-->
-            <div class="row">
-                <div class="small-12 large-centered columns">
-                    <div class="row collapse prefix-radius">
-                        <div class="small-3 columns">
-                            <span class="prefix">Search</span>
-                        </div>
-                        <div class="small-6 columns">
-                            <input type="text" placeholder="for a study space..." required>
-                        </div>
-                        <div class="small-3 columns end">
-                            <a class="button alert postfix" href="#">GO</a>
-                        </div>
+        <!--ORDER BY-->
+        <div class="row" id="orderbyContent">
+            <div class="small-12 large-centered columns">
+                <div class="row collapse prefix-radius">
+                    <div class="icon-bar five-up">
+                        <a class="item" id="all" style="background-color:rgb(0, 140, 186);">
+                            <img src="{{ 'website:static/assets/icons/all.svg' | static_url }}">
+                        </a>
+                        <a class="item" id="favorites">
+                            <img src="{{ 'website:static/assets/icons/favorite.svg' | static_url }}">
+                        </a>
+                        <a class="item" id="nearest">
+                            <img src="{{ 'website:static/assets/icons/near.svg' | static_url }}">
+                        </a>
+                        <a class="item" id="temperature">
+                            <img src="{{ 'website:static/assets/icons/temperature.svg' | static_url }}">
+                        </a>
+                        <a class="item" id="crowding">
+                            <img src="{{ 'website:static/assets/icons/crowd.svg' | static_url }}">
+                        </a>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!--ORDER BY-->
-            <div class="row">
-                <div class="small-12 large-centered columns">
-                    <div class="row collapse prefix-radius">
-                        <div class="small-3 columns">
-                            <span class="prefix">Order By</span>
-                        </div>
-                        <div class="small-9 columns">
-                            <select>
-                                <option value="All">All</option>
-                                <option value="Temperature">Temperature</option>
-                                <option value="Nearest">Nearest</option>
-                                <option value="Favorites">Favorites</option>
-                                <option value="Crowding">Crowding</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!--RESULT-->
+        <div id="firstResult">
 
             <!--HEADER-->
             <div class="row" id="headerResult">
@@ -61,7 +163,7 @@
                         <div class="row" style="color:white">
 
                             <div class="medium-2 columns">
-                                <img src="{{ 'website:static/images/icon.png' | static_url }}" width="20px" height="20px" id="headerIcon"><img>
+                                <img src="{{ 'website:static/assets/icons/computer.svg' | static_url }}" width="20px" height="20px" id="headerIcon"><img>
                                 &nbsp;
                                 <strong>
                             <span id="spaceName">
@@ -86,24 +188,28 @@
                             </div>
 
                             <div class="medium-2 columns end">
-                                <label style="color:white" id="headerButton">Less info</label>
+                                <label style="color:white; text-decoration:underline;" id="headerButton">More info</label>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!--RESULTS-->
-            <div class="row" id="resultX">
+            <!--CONTENT-->
+            <div class="row" id="contentResult">
                 <div class="small-12 large-centered columns">
                     <div class="panel">
                         <div class="row">
 
-                            <!--TODO: Doesn't work!!!-->
-                            <div class="small-12 small-centered columns" id="mapContainer">
-                                <div id="flex-video">
-                                    <iframe id="map">
-                                    </iframe>
+                            <div class="row">
+                                <div class="small-8 small-centered columns" id="mapContainer">
+                                    <!--TODO: Doesn't work!!!-->
+                                    <!--<div class="flex-video">
+                                      <div id="map"></div>-
+                                    </div>-->
+
+                                    <!--IMAGE EXAMPLE-->
+                                    <img src="{{ 'website:static/assets/images/map.png' | static_url }}">
                                 </div>
                             </div>
 
@@ -130,13 +236,13 @@
                             <div class="small-12 large-centered columns">
                                 <!--COLD=[leave empty], NORMAL=success, AVG_NORM_HOT=warning, HOT="alert"-->
                                 <label class="secondary radius label">Temperature:</label>
-                                &nbsp;<label class="success radius label" id="temperature">21°</label>
+                                &nbsp;<label class="success radius label" id="temperature">21 °C</label>
                             </div>
 
                             <div class="small-12 large-centered columns">
                                 <!--TODO: give a nice click effect-->
                                 <label class="secondary radius label">Map:</label>
-                                &nbsp;<label class="secondary radius label" id="mapButton"><a>Click to hide</a></label>
+                                &nbsp;<label class="secondary radius label" id="mapButton"><a>Click to view</a></label>
                             </div>
 
                             <div class="small-12 large-centered columns">
@@ -146,8 +252,8 @@
                             <div class="small-12 columns">
                                 <ul class="clearing-thumbs" data-clearing="" style="">
                                     <li>
-                                        <a class="th" href="{{ 'website:static/images/picture.png' | static_url }}">
-                                            <img data-caption="This a test." src="{{ 'website:static/images/thumbnail.png' | static_url }}">
+                                        <a class="th" href="{{ 'website:static/assets/images/picture.png' | static_url }}">
+                                            <img data-caption="This a test." src="{{ 'website:static/assets/images/thumbnail.png' | static_url }}">
                                         </a>
                                     </li>
                                 </ul>
@@ -157,7 +263,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 {% endblock %}

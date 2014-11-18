@@ -3,7 +3,6 @@
 {% block title %}Sign up - {{ super() }}{% endblock %}
 
 {% block content %}
-    <br/>
     <div id="signupSection">
         <!--ALERTS-->
         <div class="row" id="singupSucceed">
@@ -23,14 +22,40 @@
                     <h5>Sign up</h5>
                     <br>
                     <form data-abide id="signupForm">
-                        <div class="email-field">
+                        <div class="text-field">
                             <div class="row collapse prefix-radius">
                                 <div class="small-3 columns">
-                                    <span class="prefix">Email</span>
+                                    <span class="prefix">Firstname</span>
                                 </div>
                                 <div class="small-9 columns">
-                                    <input type="email" placeholder="firstname.lastname@unitn.it" required>
-                                    <small class="error">An email address is required.</small>
+                                    <input type="text" placeholder="firstname" required>
+                                    <small class="error">Your firstname is required.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-field">
+                            <div class="row collapse prefix-radius">
+                                <div class="small-3 columns">
+                                    <span class="prefix">Lastname</span>
+                                </div>
+                                <div class="small-9 columns">
+                                    <input type="text" placeholder="lastname" required>
+                                    <small class="error">Your lastname is required.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="select-box">
+                            <div class="row collapse prefix-radius">
+                                <div class="small-3 columns">
+                                    <span class="prefix">Department</span>
+                                </div>
+                                <div class="small-9 columns">
+                                    <select required>
+                                        <option value=""></option>
+                                        <option value="Altro">Altro</option>
+                                        <option value="ScienzeInformazione">Scienze dell'Informazione</option>
+                                    </select>
+                                    <small class="error">Your department is required.</small>
                                 </div>
                             </div>
                         </div>
