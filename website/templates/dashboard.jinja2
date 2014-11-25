@@ -5,6 +5,7 @@
 {% block css %}
     {{ super() }}
     <!--MAP-->
+    <link rel="stylesheet" href="{{ 'website:static/css/dashboard.css' | static_url }}"/>
     <style type="text/css">
         #map {
             width: 100%;
@@ -159,8 +160,118 @@
             <!--HEADER-->
             <div class="row" id="headerResult">
                 <div class="small-12 large-centered columns">
-                    <div class="panel" style="background: #313131; border-radius: 10px; border-width:1px; border-color:black;">
-                        <div class="row" style="color:white">
+                    <div class="panel">
+                        <div class="row">
+
+                            <div class="medium-2 columns">
+                                <img src="{{ 'website:static/assets/icons/computer.svg' | static_url }}" width="20px" height="20px" id="headerIcon"><img>
+                                &nbsp;
+                                <strong>
+                            <span id="spaceName">
+                              B106
+                            </span>
+                                </strong>
+                            </div>
+
+                            <!--HIDE WHEN CLICKED-->
+                            <!--creating a span with id="summaryHeader" doesn't work-->
+                            <div class="medium-2 columns summaryHeader">
+                          <span id="location">
+                            Povo A, 1st Floor
+                          </span>
+                            </div>
+
+                            <!--HIDE WHEN CLICKED-->
+                            <div class="medium-5 columns summaryHeader">
+                                <!--FULL=alert, AVG=warning, FREE=success-->
+                                <span style="font-size:11px;">Status:</span>
+                                <label class="alert radius label" id="headerStatus">Full</label>
+                            </div>
+
+                            <div class="medium-2 columns end">
+                                <label style="color:white; text-decoration:underline;" id="headerButton">More info</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--CONTENT-->
+            <div class="row" id="contentResult">
+                <div class="small-12 large-centered columns">
+                    <div class="panel">
+                        <div class="row">
+
+                            <div class="row">
+                                <div class="small-8 small-centered columns" id="mapContainer">
+                                    <!--TODO: Doesn't work!!!-->
+                                    <!--<div class="flex-video">
+                                      <div id="map"></div>-
+                                    </div>-->
+
+                                    <!--IMAGE EXAMPLE-->
+                                    <img src="{{ 'website:static/assets/images/map.png' | static_url }}">
+                                </div>
+                            </div>
+
+                            <div class="small-12 large-centered columns">
+                                <label class="secondary radius label" style="background-color:transparent; color:black;"><strong>Info:</strong></label>
+                            </div>
+
+                            <div class="small-12 large-centered columns">
+                                <label class="secondary radius label">Location: </label>
+                                &nbsp;<label class="radius label" style="background-color:gray" id="locationName">Povo A, 1st Floor</label>
+                            </div>
+
+                            <!--I think it doesn't need a description because there already an image that describes it-->
+                            <!--<div class="small-12 large-centered columns">
+                              <label class="secondary radius label">Description: </label><span style="font-size:12px" id="description">&nbsp;"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</span>
+                            </div>-->
+
+                            <div class="small-12 large-centered columns">
+                                <!--FULL=alert, AVG=warning, FREE=success-->
+                                <label class="secondary radius label">Status:</label>
+                                &nbsp;<label class="alert radius label" id="status">Full</label>
+                            </div>
+
+                            <div class="small-12 large-centered columns">
+                                <!--COLD=[leave empty], NORMAL=success, AVG_NORM_HOT=warning, HOT="alert"-->
+                                <label class="secondary radius label">Temperature:</label>
+                                &nbsp;<label class="success radius label" id="temperature">21 °C</label>
+                            </div>
+
+                            <div class="small-12 large-centered columns">
+                                <!--TODO: give a nice click effect-->
+                                <label class="secondary radius label">Map:</label>
+                                &nbsp;<label class="secondary radius label" id="mapButton"><a>Click to view</a></label>
+                            </div>
+
+                            <div class="small-12 large-centered columns">
+                                <label class="secondary radius label" style="background-color:transparent; color:black;"><strong>Pictures:</strong></label>
+                            </div>
+
+                            <div class="small-12 columns">
+                                <ul class="clearing-thumbs" data-clearing="" style="">
+                                    <li>
+                                        <a class="th" href="{{ 'website:static/assets/images/picture.png' | static_url }}">
+                                            <img data-caption="This a test." src="{{ 'website:static/assets/images/thumbnail.png' | static_url }}">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div id="firstResult">
+
+            <!--HEADER-->
+            <div class="row" id="headerResult">
+                <div class="small-12 large-centered columns">
+                    <div class="panel">
+                        <div class="row">
 
                             <div class="medium-2 columns">
                                 <img src="{{ 'website:static/assets/icons/computer.svg' | static_url }}" width="20px" height="20px" id="headerIcon"><img>
