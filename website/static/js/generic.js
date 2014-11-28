@@ -40,7 +40,7 @@ $(function() {
 
     //ORDERBY CLICK
 
-
+    /*
     $("#orderbyContent .item").click( function(event){
         normalBackground();
 
@@ -62,5 +62,5 @@ $(function() {
         $("#orderbyContent #temperature").css("background-color", "transparent");
         $("#orderbyContent #crowding").css("background-color", "transparent");
         $("#orderbyContent #favorites").css("background-color", "transparent");
-    }
+    }*/
 });

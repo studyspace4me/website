@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -11,7 +12,7 @@
    style="pointer-events: none; display: block;"
    id="svg3038"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.48.4 r9939"
    width="100%"
    height="100%"
    sodipodi:docname="favorite.svg">
@@ -27,7 +28,24 @@
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs3045" />
+     id="defs3045">
+    <linearGradient
+       id="linearGradient6302"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop6304" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5788"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#fb8521;stop-opacity:1;"
+         offset="0"
+         id="stop5790" />
+    </linearGradient>
+  </defs>
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -37,26 +55,22 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1366"
-     inkscape:window-height="715"
+     inkscape:window-width="1364"
+     inkscape:window-height="720"
      id="namedview3043"
      showgrid="false"
      inkscape:zoom="9.8333333"
      inkscape:cx="12"
      inkscape:cy="12"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg3038" />
+     inkscape:current-layer="favorite" />
   <g
      id="favorite">
     <path
        d="M12,21.4L10.6,20C5.4,15.4,2,12.3,2,8.5C2,5.4,4.4,3,7.5,3c1.7,0,3.4,0.8,4.5,2.1C13.1,3.8,14.8,3,16.5,3C19.6,3,22,5.4,22,8.5c0,3.8-3.4,6.9-8.6,11.5L12,21.4z"
-       id="path3041" />
+       id="path3041"
+       style="fill-opacity:1;fill:#fb8521" />
   </g>
-  <path
-     style="fill:#ffffff"
-     d="M 10.901695,20.268816 C 10.314407,19.696507 9.1345347,18.592913 8.2797572,17.816384 3.600073,13.565089 1.9014414,10.927216 2.0857314,8.1974334 2.1765449,6.8522649 2.6070111,5.8017665 3.467566,4.8252411 4.9098539,3.1885868 7.53608,2.6205268 9.6305085,3.4921796 10.257959,3.7533098 11.111456,4.3098558 11.582777,4.7652086 l 0.426845,0.4123838 0.619001,-0.5730856 c 1.066547,-0.9874345 2.500282,-1.53345 3.987291,-1.5184967 2.981635,0.029983 5.307924,2.4084448 5.296889,5.4156848 -0.0074,2.0261631 -0.814452,3.6795751 -3.031765,6.2114631 -0.820019,0.936357 -2.037908,2.108456 -4.318326,4.155964 -0.587288,0.527306 -1.411017,1.292079 -1.830509,1.699495 l -0.762711,0.740758 -1.067797,-1.040559 z"
-     id="path3106"
-     inkscape:connector-curvature="0" />
 </svg>

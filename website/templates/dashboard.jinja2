@@ -99,10 +99,29 @@
     {{ super() }}
 {% endblock %}
 
+{% block searchbox %}
+    <section class="middle">
+        <div class="row">
+            <div class="small-8 columns">
+                <div class="row collapse">
+                    <div class="small-8 columns">
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    <div class="small-4 columns">
+                        <a href="#" class="button postfix">
+                            <img src="{{ 'website:static/assets/icons/search.svg' | static_url }}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
 {% block content %}
     <div id="dashboardSection">
 
-{#        <!--ALERTS-->
+     {#<!--ALERTS-->
         <div class="row">
             <div class="small-12 large-centered columns">
                 <div data-alert class="alert-box info radius">
@@ -112,29 +131,12 @@
             </div>
         </div>#}
 
-        <!--SEARCH-->
-        <div class="row">
-            <div class="small-12 large-centered columns">
-                <div class="row collapse prefix-radius">
-                    <div class="small-3 columns">
-                        <span class="prefix">Search</span>
-                    </div>
-                    <div class="small-6 columns">
-                        <input type="text" placeholder="for a study space..." required>
-                    </div>
-                    <div class="small-3 columns end">
-                        <a class="button postfix" href="#">GO</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!--ORDER BY-->
         <div class="row" id="orderbyContent">
             <div class="small-12 large-centered columns">
                 <div class="row collapse prefix-radius">
                     <div class="icon-bar five-up">
-                        <a class="item" id="all" style="background-color:rgb(0, 140, 186);">
+                        <a class="item" id="all">
                             <img src="{{ 'website:static/assets/icons/all.svg' | static_url }}">
                         </a>
                         <a class="item" id="favorites">

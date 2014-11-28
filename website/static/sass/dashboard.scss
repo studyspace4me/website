@@ -8,3 +8,51 @@
 .roomIcon {
   width: 50px;
 }
+
+.icon-bar {
+  background-color: white;
+  border: 1px solid #d1d1d1;
+  /*position: fixed;
+  left: 0;
+  z-index: 100;*/
+  a {
+    &:hover {
+      background-color: #f2f2f2;
+    }
+  }
+}
+
+.tab-bar{
+  input{
+    height: 30px;
+    display: table-cell;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+
+    &:focus{
+      background-color: #ffffff;
+      outline: none;
+      border:1px solid #fbe9a0;
+      //removes shadow
+      -webkit-box-shadow: none;
+	  -moz-box-shadow: none;
+	  box-shadow: none;
+    }
+  }
+
+  .button{
+    height: 30px;
+    width: 70px;
+    background-color: #fb8521;
+
+    &:hover{
+        box-shadow: rgba(251, 133, 33, 0.5) 0px 1px 0px;
+    }
+  }
+
+  img{
+    width: 15px;
+    vertical-align: middle;
+  }
+}

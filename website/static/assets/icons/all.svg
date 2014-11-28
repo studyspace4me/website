@@ -2,11 +2,13 @@
 <!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 
 <svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
@@ -23,7 +25,20 @@
      id="metadata9"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
-     id="defs7" /><sodipodi:namedview
+     id="defs7"><linearGradient
+       id="linearGradient3766"
+       osb:paint="solid"><stop
+         style="stop-color:#fb8521;stop-opacity:1;"
+         offset="0"
+         id="stop3768" /></linearGradient><linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3766"
+       id="linearGradient3770"
+       x1="6.2933986"
+       y1="32.000153"
+       x2="57.706141"
+       y2="32.000153"
+       gradientUnits="userSpaceOnUse" /></defs><sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1"
@@ -32,19 +47,19 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1366"
-     inkscape:window-height="702"
+     inkscape:window-width="1364"
+     inkscape:window-height="720"
      id="namedview5"
      showgrid="false"
      inkscape:zoom="7.375"
      inkscape:cx="2.5752224"
      inkscape:cy="28.548643"
      inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="Capa_1" /><path
      d="m 57.062,31.398 c 0.932,-1.025 0.842,-2.596 -0.201,-3.508 L 33.884,7.785 C 32.841,6.873 31.169,6.892 30.148,7.828 L 7.093,28.962 c -1.021,0.936 -1.071,2.505 -0.111,3.503 l 0.578,0.602 c 0.959,0.998 2.509,1.117 3.46,0.265 l 1.723,-1.543 0,22.59 c 0,1.386 1.123,2.508 2.508,2.508 l 8.987,0 c 1.385,0 2.508,-1.122 2.508,-2.508 l 0,-15.804 11.463,0 0,15.804 c -0.02,1.385 0.971,2.507 2.356,2.507 l 9.524,0 c 1.385,0 2.508,-1.122 2.508,-2.508 l 0,-8.978504 0,-13.292496 c 0,0 0.476,0.417 1.063,0.933 0.586,0.515 1.817,0.102 2.749,-0.924 z"
      id="path3"
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="cccccccccsssscccsssccccc"
-     style="stroke:none;stroke-opacity:1;stroke-width:3.50000000000000000;stroke-miterlimit:4;stroke-dasharray:none;fill:#ffffff" /></svg>
+     style="stroke:none;stroke-opacity:1;stroke-width:3.50000000000000000;stroke-miterlimit:4;stroke-dasharray:none;fill:url(#linearGradient3770);fill-opacity:1" /></svg>
