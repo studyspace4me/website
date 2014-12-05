@@ -27,3 +27,33 @@ body {
     background-color: #fb8521;
   }
 }
+
+.left-off-canvas-menu {
+  background-color: #ffffff;
+
+  .off-canvas-list {
+    li {
+      label {
+        border: none;
+        background-color: #fb8521;
+        color: #ffffff;
+      }
+      a {
+        border-color: #cccccc;
+        color: #ff790a;
+      }
+    }
+
+    li:hover{
+      a{
+        background-color: #f0f0f0;
+      }
+    }
+  }
+}
+
+.move-right, .move-left{
+  .exit-off-canvas {
+    box-shadow: #5a5a5a 0px 0px 7px;
+  }
+}
