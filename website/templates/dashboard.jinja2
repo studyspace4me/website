@@ -135,7 +135,7 @@
         <div class="row" id="orderbyContent">
             <div class="small-12 large-centered columns">
                 <div class="row collapse prefix-radius">
-                    <div class="icon-bar five-up">
+                    <div class="icon-bar four-up">
                         <a class="item" id="all">
                             <img src="{{ 'website:static/assets/icons/all.svg' | static_url }}">
                         </a>
@@ -144,9 +144,6 @@
                         </a>
                         <a class="item" id="nearest">
                             <img src="{{ 'website:static/assets/icons/near.svg' | static_url }}">
-                        </a>
-                        <a class="item" id="temperature">
-                            <img src="{{ 'website:static/assets/icons/temperature.svg' | static_url }}">
                         </a>
                         <a class="item" id="crowding">
                             <img src="{{ 'website:static/assets/icons/crowd.svg' | static_url }}">
@@ -234,12 +231,6 @@
                                 <!--FULL=alert, AVG=warning, FREE=success-->
                                 <label class="secondary radius label">Status:</label>
                                 &nbsp;<label class="alert radius label" id="status">Full</label>
-                            </div>
-
-                            <div class="small-12 large-centered columns">
-                                <!--COLD=[leave empty], NORMAL=success, AVG_NORM_HOT=warning, HOT="alert"-->
-                                <label class="secondary radius label">Temperature:</label>
-                                &nbsp;<label class="success radius label" id="temperature">21 °C</label>
                             </div>
 
                             <div class="small-12 large-centered columns">
