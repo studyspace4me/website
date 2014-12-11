@@ -65,6 +65,14 @@
       background: white;
       border: solid transparent;
       margin-bottom: 1px;
+      padding-bottom: 18px;
+
+      .favoriteIcon{
+        width: 40px;
+        float: right; //puts the favorite star on the right of the result header
+        top: 28px;
+        right: 40px; //they keep the favorite star on that side
+      }
     }
   }
   .content{
@@ -97,16 +105,35 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 570px) {
   .result{
     .header{
       .panel {
-        .iconAndName{
-          clear: both;
-        }
+        //height: 120px;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
         .summaryHeader{
           display: block;
+          margin-bottom: 0px;
+          padding-bottom: 0px;
         }
+        .updated{
+          padding-left: 0px;
+        }
+        .favoriteIcon{
+          position: absolute;
+          margin-top: 0px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 377px) {
+  .result{
+    .header{
+      .panel {
+        //height: 140px;
       }
     }
   }

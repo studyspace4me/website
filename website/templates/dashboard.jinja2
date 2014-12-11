@@ -142,7 +142,7 @@
                             <img src="{{ 'website:static/assets/icons/all.svg' | static_url }}">
                         </a>
                         <a class="item" id="favorites">
-                            <img src="{{ 'website:static/assets/icons/favorite.svg' | static_url }}">
+                            <img src="{{ 'website:static/assets/icons/favorites.svg' | static_url }}">
                         </a>
                         <a class="item" id="nearest">
                             <img src="{{ 'website:static/assets/icons/near.svg' | static_url }}">
@@ -184,6 +184,10 @@
                                &nbsp;
                                <label class="alert radius label status" id="headerStatus">Full</label>
                                <label class="radius label updated" id="updated"><i>Updated 3h ago</i></label>
+                           </span>
+
+                           <span class="favoriteStar">
+                               <img src="{{ 'website:static/assets/icons/emptyFavorite.svg' | static_url }}" class="favoriteIcon" id="favoriteResult"><img>
                            </span>
                     </div>
                  </div>
