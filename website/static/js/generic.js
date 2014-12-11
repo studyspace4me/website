@@ -19,14 +19,8 @@ $(function() {
     $("#mapContainer").hide();
     $("#headerResult").click( function(){
         $("#contentResult").slideToggle();
-        if($("#headerButton").text() == "More info"){
-            $("#headerButton").text("Less info");
-            $("#headerResult .summaryHeader").hide();
-        }
-        else{
-            $("#headerButton").text("More info");
-            $("#headerResult .summaryHeader").show();
-        }
+        //$("#headerResult .summaryHeader").hide();
+        //$("#headerResult .summaryHeader").show();
     });
 
     $("#mapButton").click( function(){
