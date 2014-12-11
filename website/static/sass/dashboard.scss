@@ -124,10 +124,3 @@
     display: none;
   }
 }
-
-//website not visible for devices that have a width resolution smaller than 300px
-@media screen and (max-width: 300px) {
-  body{
-    display: none;
-  }
-}
