@@ -7,14 +7,6 @@ def dashboard(request):
     return {'full_name': 'User'}
 
 
-def login(request):
-    return {}
-
-
-def register(request):
-    return {}
-
-
 def preferences(request):
     return {}
 

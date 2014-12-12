@@ -3,7 +3,7 @@ var pUnoGf;
 var pUnoFf;
 var pDueGf;
 var pDueFf;
-var placeImage='StudySpace64Icon.svg';
+var placeImage='static/assets/icons/mapmark.svg';
 var luoghi;
 var start;
 
