@@ -22,7 +22,7 @@
             </section>
 
             <section class="left">
-                    <h1 class="title">&nbsp;&nbsp;&nbsp;Study Space For Me</h1>
+                    <h1 class="websiteName">&nbsp;&nbsp;&nbsp;Study Space For Me</h1>
             </section>
 
             <section>
@@ -33,17 +33,10 @@
         <aside class="left-off-canvas-menu">
             <ul class="off-canvas-list">
                 <li><label>StudySpace4.me</label></li>
-                {#            <span id="beforeLogin">#}
-                <li id="loginButton"><a href="{{ request.route_url('login') }}">Login</a></li>
-                <li id="signUpButton"><a href="{{ request.route_url('register') }}">Sign up</a></li>
-                {#            </span>#}
-                {#            <span id="afterLogin">#}
                 <li id="dashboardButton"><a href="{{ request.route_url('dashboard') }}">Dashboard</a></li>
                 <li id="preferencesButton"><a href="{{ request.route_url('preferences') }}">Preferences</a></li>
                 <li id="contributeButton"><a href="{{ request.route_url('contribute') }}">Contribute</a></li>
                 <li id="termsofuseButton"><a href="{{ request.route_url('terms') }}">Terms of use</a></li>
-                <li id="logout"><a href="{{ request.route_url('logout') }}">Logout</a></li>
-                {#            </span>#}
             </ul>
         </aside>
 

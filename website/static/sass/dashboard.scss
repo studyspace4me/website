@@ -79,6 +79,8 @@
     .panel {
       margin: auto;
       background-color: #fbfbfb;
+      padding-bottom:0px;
+
       .title {
         color: black;
         background-color: transparent;
@@ -93,13 +95,19 @@
         background-color: transparent;
       }
       .emptyStatus{
-        color:darkgreen;
+        border-width: 1px;
+        color:green;
       }
       .averageStatus{
-        color:orangered;
+        border-width: 1px;
+        color:orange;
       }
       .fullStatus{
+        border-width: 1px;
         color:red;
+      }
+      .feedback{
+        margin-left: 20px;
       }
     }
   }
@@ -129,18 +137,8 @@
   }
 }
 
-@media screen and (max-width: 377px) {
-  .result{
-    .header{
-      .panel {
-        //height: 140px;
-      }
-    }
-  }
-}
-
 @media screen and (max-width: 800px) {
-  .title {
+  .websiteName {
     display: none;
   }
 }

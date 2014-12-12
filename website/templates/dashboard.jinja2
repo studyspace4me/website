@@ -4,91 +4,10 @@
 
 {% block css %}
     {{ super() }}
-    <!--MAP-->
+
     <link rel="stylesheet" href="{{ 'website:static/css/dashboard.css' | static_url }}"/>
-    <style type="text/css">
-        #map {
-            width: 100%;
-            height: 100%;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        #selectedOrderby {
-            background-color: rgb(0, 140, 186);
-        }
-    </style>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&language=it"></script>
-    <script type="text/javascript">
-        function initialize() {
-            // Create an array of styles.
-            var styles = [
-                {
-                    stylers: [
-                        { hue: "#fcf505" },
-                        { saturation: -25 }
-                    ]
-                },{
-                    featureType: "all",
-                    elementType: "labels",
-                    stylers: [
-                        { visibility: "off" }
-                    ]
-                },
-                {
-                    featureType: "road",
-                    elementType: "geometry",
-                    stylers: [
-                        { lightness: 95 },
-                        { visibility: "simplified" }
-                    ]
-                },{
-                    featureType: "administrative.locality",
-                    elementType: "labels",
-                    stylers: [
-                        { visibility: "on" }
-                    ]
-                },
-                {
-                    featureType: "road",
-                    elementType: "labels.text",
-                    stylers: [
-                        { visibility: "on" }
-                    ]
-                }
-            ];
-
-            // Create a new StyledMapType object, passing it the array of styles,
-            // as well as the name to be displayed on the map type control.
-            var styledMap = new google.maps.StyledMapType(styles,
-                    {name: "StudySpace4Me"});
-
-            // Create a map object, and include the MapTypeId to add
-            // to the map type control.
-            var trento = new  google.maps.LatLng(46.0804614,11.1203557);
-            var mapOptions = {
-                center: trento,
-                zoom: 12,
-                mapTypeControlOptions: {
-                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'stile']
-                }
-            };
-
-            var map = new google.maps.Map(document.getElementById('map'),
-                    mapOptions);
-
-            var groundFloor=new google.maps.KmlLayer({
-                url: 'https://sites.google.com/site/publickmlstorage/files/gfloor.kml',
-                preserveViewport: true,
-                suppressInfoWindows:false
-            });
-            groundFloor.setMap(map);
-            //Associate the styled map with the MapTypeId and set it to display.
-            map.mapTypes.set('stile', styledMap);
-            map.setMapTypeId('stile');
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+    <script type="text/javascript" src="{{ 'website:static/js/dynamicmap.js' | static_url }}"></script>
 {% endblock %}
 
 {% block urgentjs %}
@@ -98,6 +17,7 @@
 {% block js %}
     {{ super() }}
 {% endblock %}
+
 
 {% block searchbox %}
         <div class="row">
@@ -122,17 +42,6 @@
 
 {% block content %}
     <div id="dashboardSection">
-
-        {#<!--ALERTS-->
-        <div class="row">
-            <div class="small-12 large-centered columns">
-                <div data-alert class="alert-box info radius">
-                    Hi <span id="studentName">!</span> Welcome to your dashboard.
-                    <a href="#" class="close">&times;</a>
-                </div>
-            </div>
-        </div>#}
-
         <!--ORDER BY-->
         <div class="row" id="orderbyContent">
             <div class="small-12 large-centered columns">
@@ -157,11 +66,10 @@
 
         <!--RESULT-->
         <div class="result" id="firstResult">
-
             <!--HEADER-->
             <div class="row header" id="headerResult">
                 <div class="small-12 large-centered columns">
-                    <div class="panel">
+                    <div class="panel" id="a202" onclick="getMap('a202')">
                            <span class="iconAndName">
                                 <img src="{{ 'website:static/assets/icons/computer.svg' | static_url }}" class="roomIcon"><img>
                                 &nbsp;
@@ -170,16 +78,11 @@
                                 </strong>
                            </span>
 
-                           &nbsp;
-                           &nbsp;
-                           &nbsp;
-                           &nbsp;
+                           &nbsp;&nbsp;&nbsp;&nbsp;
 
-                           <!--HIDE WHEN CLICKED-->
-                           <!--creating a span with id="summaryHeader" doesn't work-->
                            <span class="summaryHeader">
                                <span id="location">
-                                   Povo A, 1st Floor:
+                                   Povo B, 1st Floor:
                                </span>
                                &nbsp;
                                <label class="alert radius label status" id="headerStatus">Full</label>
@@ -197,65 +100,18 @@
             <div class="row content" id="contentResult">
                 <div class="small-12 large-centered columns">
                     <div class="panel">
-                        <div class="row">
-                            <div class="row">
-                                <div class="small-8 small-centered columns" id="mapContainer">
-                                    <!--TODO: Doesn't work!!!-->
-                                    <!--<div class="flex-video">
-                                      <div id="map"></div>-
-                                    </div>-->
+                        <div class="feedback">
+                            <label class="title">Give your feedback:</label>
+                            <ul class="button-group round">
+                                <li><a href="#" class="tiny secondary button emptyStatus">&nbsp;Empty</a></li>
+                                <li><a href="#" class="tiny secondary button averageStatus">Average</a></li>
+                                <li><a href="#" class="tiny secondary button fullStatus">&nbsp;Full&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                            </ul>
+                        </div>
 
-                                    <!--IMAGE EXAMPLE-->
-                                    <img src="{{ 'website:static/assets/images/map.png' | static_url }}">
-                                <br>
-                                <br>
-                                </div>
-                            </div>
-
-                            <div class="small-4 columns">
-                                <label class="secondary radius label title"><strong>Info:</strong></label>
-
-                                <br>
-
-                                <label class="secondary radius label detail">Location: </label>
-                                <label class="radius label location" id="locationName">Povo A, 1st Floor</label>
-
-                                <br>
-
-                                <!--FULL=alert, AVG=warning, EMPTY=success-->
-                                <label class="secondary radius label detail">Status: </label>&nbsp;&nbsp;&nbsp;
-                                <label class="alert radius label" id="status">Full</label>
-                                <label class="radius label updated" id="updated"><i>Updated 3h ago</i></label>
-
-                                <br>
-
-                                <!--TODO: give a nice click effect-->
-                                <label class="secondary radius label detail">Map: </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <label class="secondary radius label" id="mapButton"><a>Click to view</a></label>
-                            </div>
-
-                            <div class="small-4 columns">
-                                <label class="secondary radius label title"><strong>My Feedback:</strong></label>
-
-                                <label>Status:</label>
-                                    <input type="radio" name="status" value="Empty" id="statusEmpty"><label class="emptyStatus" for="statusEmpty">Empty</label>
-                                    <input type="radio" name="status" value="Average" id="statusAverage"><label class="averageStatus" for="statusAverage">Average</label>
-                                    <input type="radio" name="status" value="Full" id="statusFull"><label class="fullStatus" for="statusFull">Full</label>
-                            </div>
-
-                            <div class="small-4 columns">
-                                <label class="secondary radius label title"><strong>Picture:</strong></label>
-
-                                <br>
-
-                                <ul class="clearing-thumbs" data-clearing="">
-                                    <li>
-                                        <a class="th" href="{{ 'website:static/assets/images/picture.png' | static_url }}">
-                                            <img data-caption="This a test." src="{{ 'website:static/assets/images/thumbnail.png' | static_url }}">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="map" id="map" style="width: 100%; height: 250px; margin-bottom:20px;">
+                            <br>
+                            <br>
                         </div>
                     </div>
                 </div>
