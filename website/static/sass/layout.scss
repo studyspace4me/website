@@ -20,6 +20,8 @@ body {
   border-radius: 2px;
   background: white;
   border: solid transparent;
+    cursor: pointer;
+box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
 }
 
 //makes the content fit the whole browser and makes the page scrollable
@@ -50,6 +52,7 @@ body {
   background-color: #ffffff;
   .off-canvas-list {
     li {
+        text-decoration: underline;
       label {
         border: none;
         background-color: #fb8521;
