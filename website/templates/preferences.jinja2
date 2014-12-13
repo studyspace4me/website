@@ -2,51 +2,21 @@
 
 {% block title %}Settings - {{ super() }}{% endblock %}
 
+{% block css %}
+    {{ super() }}
+
+    <link rel="stylesheet" href="{{ 'website:static/css/preferences.css' | static_url }}"/>
+{% endblock %}
+
 {% block content %}
 <div id="preferencesSection">
-
-    <div class="row">
-        <div class="small-12 large-centered columns">
-            <div data-alert class="alert-box info radius">
-                Hi <span id="studentName">Omar</span>! Set up your webapp as you need.
-                <a href="#" class="close">&times;</a>
-            </div>
-        </div>
-    </div>
-
-
     <!--PANEL-->
     <div class="row">
         <div class="small-12 large-centered columns">
-            <div class="panel callout radius">
+            <div class="panel">
                 <h5>Preferences</h5>
                 <br>
-                <form data-abide id="preferencesForm">
-                    <div class="row">
-                        <div class="small-12 large-centered columns">
-                            <div class="select-box">
-                                <div class="row collapse prefix-radius">
-                                    <div class="small-3 columns">
-                                        <span class="prefix">Departments to view</span>
-                                    </div>
-                                    <div class="small-9 columns">
-                                        <select required>
-                                            <option value="ScienzeInformazione">Information Science</option>
-                                            <option value="Altro">All</option>
-                                        </select>
-                                        <small class="error">Your department is required.</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p>More options coming soon!</p>
-
-                    <div class="small-3 small-centered columns">
-                        <a id="preferencesSubmit" class="tiny button radius">Apply</a>
-                    </div>
-                </form>
+                <!--LOAD WITH AJAX THE DEPARTMENTS-->
             </div>
         </div>
     </div>

@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block css %}
         <link rel="stylesheet" href="{{ 'website:static/css/foundation.css' | static_url }}" />
-        <link rel="stylesheet" href="{{ 'website:static/css/screen.css' | static_url }}" />
+        <link rel="stylesheet" href="{{ 'website:static/css/layout.css' | static_url }}" />
     {% endblock %}
     {% block urgentjs %}
         <script src="{{ 'website:static/js/vendor/modernizr.js' | static_url }}"></script>
     {% endblock %}
 </head>
-<body style="overflow:hidden;">
+<body>
 <div class="off-canvas-wrap" data-offcanvas>
     <div class="inner-wrap">
         <nav class="tab-bar">
@@ -39,10 +39,8 @@
             </ul>
         </aside>
 
-        <section class="main-section" style="height: 93vh;">
-            <!--DONNOT REMOVE THIS ADDITIONAL STYLE-->
-            <!--this additional style makes it fit the whole browser and makes the page scrollable-->
-            <div class="content" style="overflow-y: scroll; height: 100%;">
+        <section class="main-section">
+            <div class="main-content">
                 <br>
                 {% block content %}{% endblock %}
                 <a class="exit-off-canvas"></a>

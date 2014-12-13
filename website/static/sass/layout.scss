@@ -12,6 +12,23 @@ body {
   color: #3f3f3f;
   font-family: Roboto;
   min-width: 270px;
+  overflow:hidden;
+}
+
+.panel {
+  box-shadow: rgba(0, 0, 0, .2) 1px 1px 2px;
+  border-radius: 2px;
+  background: white;
+  border: solid transparent;
+}
+
+//makes the content fit the whole browser and makes the page scrollable
+.main-section{
+   height: 93vh;
+  .main-content{
+    overflow-y: scroll;
+    height: 100%;
+  }
 }
 
 .tab-bar {
@@ -31,7 +48,6 @@ body {
 
 .left-off-canvas-menu {
   background-color: #ffffff;
-
   .off-canvas-list {
     li {
       label {
@@ -44,7 +60,6 @@ body {
         color: #ff790a;
       }
     }
-
     li:hover{
       a{
         background-color: #f0f0f0;
@@ -57,4 +72,8 @@ body {
   .exit-off-canvas {
     box-shadow: #5a5a5a 0px 0px 7px;
   }
+}
+
+textarea{
+  background-color: #fafafa;
 }
