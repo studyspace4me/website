@@ -5,6 +5,9 @@
 .icon-bar {
   background-color: white;
   #border: 1px solid #d1d1d1;
+  -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
+  border-top-left-radius: 2px;
   a {
     &:hover {
       background-color: #f2f2f2;
@@ -77,7 +80,7 @@
   }
   .content{
     .panel {
-        box-shadow: rgba(0,0,0,.2) 0px 4px 8px;
+      box-shadow: rgba(0,0,0,.2) 0px 4px 8px;
       margin: auto;
       background-color: #fbfbfb;
       padding-bottom:0px;
@@ -121,21 +124,21 @@
 }
 
 @media screen and (max-width: 570px) {
-  .result{
-    .header{
+  .result {
+    .header {
       .panel {
         padding-bottom: 0px;
         margin-bottom: 1px;
 
-        .summaryHeader{
+        .summaryHeader {
           display: block;
           margin-bottom: 0px;
           padding-bottom: 0px;
         }
-        .updated{
+        .updated {
           padding-left: 0px;
         }
-        .favoriteIcon{
+        .favoriteIcon {
           position: absolute;
           margin-top: 0px;
         }
@@ -148,10 +151,4 @@
   .websiteName {
     display: none;
   }
-}
-
-.icon-bar {
-	-webkit-box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
-	border-top-left-radius: 2px;
 }

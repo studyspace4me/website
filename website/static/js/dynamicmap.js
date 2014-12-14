@@ -134,7 +134,7 @@ function localizzazione(){
          maximumAge: Infinity});
     }
     else{
-      alert("La geo-localizzazione non è possibile");
+      alert("Geo-localization isn't possible");
     }
 }
 //Altra Parte
@@ -251,13 +251,13 @@ function impostaLocazzione(tmp){
 }
 function porblemiNellaLocalizzazione(error) {
     if (error.code == 1) {
-        alert("L'utente non ha autorizzato la geolocalizzazione");
+        alert("The user didn't allow the geo-localization");
     } else if (error.code == 2) {
-        alert("Posizione non disponibile");
+        alert("Position not available");
     } else if (error.code == 3) {
         alert("Timeout");
     } else {
-        alert("ERRORE:" + err.message);
+        alert("ERROR:" + err.message);
     }
 }
 
