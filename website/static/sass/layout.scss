@@ -25,9 +25,16 @@ body {
 //makes the content fit the whole browser and makes the page scrollable
 .main-section{
    height: 93vh;
+  background-color: transparent;
   .main-content{
     overflow-y: scroll;
     height: 100%;
+
+    //fixes a bug on firefox
+    width: 100%;
+    float: left;
+    padding: 0px;
+    margin: 0px;
   }
 }
 

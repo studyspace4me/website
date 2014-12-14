@@ -3,12 +3,15 @@ $(document).foundation();
 $(function() {
     //MECHANICS ANIMATIONS
     $("#contentResult").hide();
-    $("#mapContainer").hide();
     $("#headerResult").click(function () {
-        if ($("#contentResult").is(":hidden"))
+        if ($("#contentResult").is(":hidden")) {
             $("#contentResult").slideDown();
-        else
+        }
+        else {
             $("#contentResult").slideUp();
+        }
+
+        google.maps.event.trigger(mapV, "resize"); // resize map
 
     }).on('click', '.favoriteStar', function (e) {
         //stop the propagation of the click on the favorite star, so when clicked the result content doesn't toggle

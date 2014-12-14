@@ -109,12 +109,13 @@
       .feedback{
         margin-left: 20px;
       }
-      .mapContainer{
-        width: 100%;
-        height: 250px;
-        margin-bottom:20px;
-      }
     }
+  }
+}
+
+.mapContainer{
+  img{
+    max-width: none;
   }
 }
 
@@ -142,7 +143,7 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .websiteName {
     display: none;
   }
