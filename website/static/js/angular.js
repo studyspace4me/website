@@ -20,7 +20,7 @@ function dashboardController($http, $scope) {
             return  { 'background-color': 'transparent' };
         };
         $scope.getLastUpdate = function (lastUpdate) {
-            return "Updated " + lastUpdate;
+            return "Updated " + moment(lastUpdate).fromNow();
         };
         $scope.getTime = function (until) {
             return "Next lecture " + moment(until).fromNow();
