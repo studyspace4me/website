@@ -1,7 +1,9 @@
+from datetime import datetime, timedelta
 from cornice import Service
 from sqlalchemy.exc import DBAPIError
 from website import DBSession
 from website.models import Room
+from website.utils import format_time_momentjs
 
 rooms = Service(name='rooms', path='/api/rooms/', description='Room status')
 preferences = Service(name='preferences', path='/api/prefs/', description='User preferences')
@@ -15,8 +17,8 @@ def get_rooms(request):
     rl = []
     for room in rooms:
         r = {'name': room.id, 'location': room.location, 'favorite': False, 'type': room.type_str, 'feedback': 'Half',
-             'lastUpdate': '15:00'}
-        status = {'busy': False, 'until': '13:00'}
+             'lastUpdate': format_time_momentjs(datetime.now()-timedelta(hours=1))}
+        status = {'busy': False, 'until': format_time_momentjs(datetime.now() + timedelta(hours=3))}
         r['status'] = status
         rl.append(r)
     return {'status': 'ok', 'rooms': rl}
