@@ -16,7 +16,7 @@ def get_rooms(request):
     for room in rooms:
         r = {'name': room.id, 'location': room.location, 'favorite': False, 'type': room.type_str, 'feedback': 'Half',
              'lastUpdate': '15:00'}
-        status = {'busy': False}
+        status = {'busy': False, 'until': '13:00'}
         r['status'] = status
         rl.append(r)
     return {'status': 'ok', 'rooms': rl}
