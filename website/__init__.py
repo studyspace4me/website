@@ -1,5 +1,14 @@
 from pyramid.config import Configurator
-from website.models import get_root
+#from website.models import get_root
+
+from pyramid.config import Configurator
+from sqlalchemy import engine_from_config
+
+from .models import (
+    DBSession,
+    Base,
+    )
+
 
 def main(global_config, **settings):
     """ This function returns a WSGI application.
@@ -7,13 +16,19 @@ def main(global_config, **settings):
     It is usually called by the PasteDeploy framework during 
     ``paster serve``.
     """
+
+    engine = engine_from_config(settings, 'sqlalchemy.')
+    DBSession.configure(bind=engine)
+    Base.metadata.bind = engine
+
     settings = dict(settings)
     settings.setdefault('jinja2.i18n.domain', 'website')
 
-    config = Configurator(root_factory=get_root, settings=settings)
+    config = Configurator(settings=settings)
     config.add_translation_dirs('locale/')
     config.include('pyramid_jinja2')
-
+    config.include('cornice')
+    config.scan('website.api')
     config.add_static_view(name='static', path='static')
     config.add_route('dashboard', '/')
     config.add_route('preferences', '/preferences/')
