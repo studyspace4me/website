@@ -12,6 +12,10 @@
 
 {% block urgentjs %}
     {{ super() }}
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="{{ 'website:static/js/angular.js' | static_url }}"> </script>
+    <script src="{{ 'website:static/js/moment.js' | static_url }}"> </script>
 {% endblock %}
 
 {% block js %}
@@ -20,27 +24,29 @@
 
 {% block searchbox %}
         <div class="row">
-            <ul>
-                <li class="has form center searchBox">
-                    <div class="small-8 columns">
-                        <div class="row collapse">
-                            <div class="small-8 columns">
-                                <input type="text" placeholder="">
+                    <div class="small-8 small-centered columns">
+                        <div class="row collapse" style="margin-top:6px; padding-top:0px;">
+                            <div class="small-8 small-centered columns searchInputContainer" style="display:flex; margin-top: 0px; padding-top: 0px;">
+                                <input type="text">
                             </div>
-                            <div class="small-4 columns">
+                            <div class="small-4 small-centered columns searchButtonContainer" style="float:right">
                                  <a href="#" class="button postfix searchButton">
                                     Search
                                 </a>
                             </div>
                         </div>
                     </div>
-                </li>
-            </ul>
         </div>
 {% endblock %}
 
 {% block content %}
-    <div id="dashboardSection">
+    <!--WHERE THE MAP IS LOADED, THEN IS TRANSFERRED-->
+    <div>
+        <div id="map" style="width: inherit; height: inherit;"></div>
+    <div/>
+
+    <div id="dashboardSection" ng-app="customInterpolationApp" ng-controller="dashboardController">
+
         <!--ORDER BY-->
         <div class="row" id="orderbyContent">
             <div class="small-12 large-centered columns">
@@ -49,7 +55,7 @@
                         <a class="item" id="all">
                             <img src="{{ 'website:static/assets/icons/all.svg' | static_url }}">
                         </a>
-                        <a class="item" id="favorites">
+                        <a class="item" id="favorites" ng-click="">
                             <img src="{{ 'website:static/assets/icons/favorites.svg' | static_url }}">
                         </a>
                         <a class="item" id="nearest">
@@ -64,16 +70,16 @@
         </div>
 
         <!--RESULT-->
-        <div class="result" id="firstResult">
+        <div class="result" ng-repeat="x in results">
             <!--HEADER-->
             <div class="row header" id="headerResult">
                 <div class="small-12 large-centered columns">
-                    <div class="panel" id="b106" onclick="getMap('b106')">
+                    <div class="panel" ng-click="showContent(x.name)">  <!--onclick="getMap('b106')"-->
                            <span class="iconAndName">
-                                <img src="{{ 'website:static/assets/icons/computer.svg' | static_url }}" class="roomIcon"><img>
+                                <img ng-src="[[getRoomIcon(x.type)]]" class="roomIcon"><img>
                                 &nbsp;
                                 <strong>
-                                    <span id="spaceName"> B106 </span>
+                                    <span id="spaceName"> [[x.name]] </span>
                                 </strong>
                            </span>
 
@@ -81,24 +87,28 @@
 
                            <span class="summaryHeader">
                                <span id="location">
-                                   Povo B, 1st Floor:
+                                   [[x.location]]
+                               </span>
+                               <span id="until">
+                                   <i>([[getTime(x.status.until)]]) :</i>
                                </span>
                                &nbsp;
-                               <label class="alert radius label status" id="headerStatus">Full</label>
-                               <label class="radius label updated" id="updated"><i>Updated 3h ago</i></label>
+                               <label class="radius label status" ng-style="getBackground(x.feedback)" id="headerStatus">[[x.feedback]]</label>
+                               <label class="radius label updated" id="updated"><i>[[getLastUpdate(x.lastUpdate)]]</i></label>
                            </span>
 
                            <span class="favoriteStar">
-                               <img src="{{ 'website:static/assets/icons/emptyFavorite.svg' | static_url }}" class="favoriteIcon" id="favoriteResult"><img>
+                               <img ng-src="[[getFavoriteImage(x.favorite)]]" ng-click="changeFavorite([['favorite' + x.name]]); $event.stopPropagation();" class="favoriteIcon" id="[['favorite' + x.name]]"><img>
                            </span>
                     </div>
                  </div>
             </div>
+            {# {{ 'website:static/assets/icons/[[x.favorite]]' | static_url }} #}
 
             <!--CONTENT-->
-            <div class="row content" id="contentResult">
+            <div class="row content">
                 <div class="small-12 large-centered columns">
-                    <div class="panel">
+                    <div class="contentPanel panel" id="[[x.name]]" style="display: none;">
                         <div class="feedback">
                             <label class="title">Give your feedback:</label>
                             <ul class="button-group round">
@@ -108,7 +118,7 @@
                             </ul>
                         </div>
 
-                        <div class="mapContainer" id="map"  style="width: 100%; height: 250px; margin-bottom: 20px; padding-bottom: 20px;"></div>
+                        <div class="mapContainer" id="[['map' + x.name]]"  style="width: 100%; height: 250px; margin-bottom: 20px; padding-bottom: 20px;"></div>
                     </div>
                 </div>
             </div>

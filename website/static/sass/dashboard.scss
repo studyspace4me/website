@@ -8,6 +8,7 @@
   -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
   box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
   border-top-left-radius: 2px;
+  margin-bottom: 10px;
   a {
     &:hover {
       background-color: #f2f2f2;
@@ -16,34 +17,50 @@
 }
 
 .tab-bar {
-  input {
-    height: 32px;
-    display: table-cell;
-    vertical-align: middle;
-    border-right: none;
-    &:focus {
-      background-color: #ffffff;
-      outline: none;
-      border: 1px solid #d0d0d0;
+  .searchInputContainer {
+    width: 80%;
+    float: left; //to display button aligned
+
+    input {
+      height: 32px;
+      display: table-cell;
+      vertical-align: middle;
       border-right: none;
-      //removes shadow
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
+
+      //fixes a margin between the tab-bar and the content section on firefox
+      margin-bottom: 0px;
+      &:focus {
+        background-color: #ffffff;
+        outline: none;
+        border: 1px solid #d0d0d0;
+        border-right: none;
+        //removes shadow
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+      }
     }
   }
-  .button {
-    color: #333;
-    height: 32px;
-    width: 80px;
-    background-color: #f8f8f8;
-    border: solid 1px #d3d3d3;
-    font-size: 12px;
-    text-align: center;
-    &:hover {
-      background-color: #efefef;
+
+  .searchButtonContainer {
+    width: 20%;
+
+    .button {
+      color: #333;
+      height: 32px;
+      background-color: #f8f8f8;
+      border: solid 1px #d3d3d3;
+      font-size: 12px;
+      text-align: center;
+
+      //fixes a margin between the tab-bar and the content section on firefox
+      margin-bottom: 0px;
+      &:hover {
+        background-color: #efefef;
+      }
     }
   }
+
   img {
     width: 15px;
     vertical-align: middle;
@@ -54,6 +71,8 @@
 }
 
 .result{
+  margin-bottom: 5px;
+
   .label{
     font-size: 14px;
   }
@@ -69,7 +88,15 @@
       border: solid transparent;
       margin-bottom: 1px;
       padding-bottom: 18px;
-
+      .full{
+        background-color: red;
+      }
+      .empty{
+        background-color: green;
+      }
+      .half{
+        background-color: orange;
+      }
       .favoriteIcon{
         width: 40px;
         float: right; //puts the favorite star on the right of the result header
@@ -147,8 +174,49 @@
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
   .websiteName {
     display: none;
   }
+}
+
+//MAP
+ #map div{
+            line-height: normal !important;
+        }
+                .firstTitle{
+            border-bottom: 2px black;
+        }
+        #tipoViaggio{
+            display: block;
+        }
+        .viaggio,.stato32{
+            display: block;
+        }
+        .direzione {
+            background-color:#fb8521;
+            border:1px solid #eeb44f;
+            display:inline-block;
+            color:#ffffff;
+            font: 15px/18px futura;
+            padding:3px 5px;
+            text-decoration:none;
+        }
+    .direzione:hover {
+	   background-color:#fb5510;
+    }
+    .direzione:active {
+	   position:relative;
+	   top:1px;
+    }
+    .direzione{
+      margin-top:10px;
+      margin-left:25px;
+        display: block;
+    }
+    .stato31{
+        display:inline-block;
+    }
+.contenuto{
+  width:100%;
 }

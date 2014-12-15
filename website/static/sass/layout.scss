@@ -25,7 +25,7 @@ body {
     overflow-y: scroll;
     height: 100%;
 
-    //fixes a bug on firefox
+    //fixes a bug on firefox which makes the content stay in right side of the page
     width: 100%;
     float: left;
     padding: 0px;

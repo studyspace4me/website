@@ -5,22 +5,23 @@ var pDueGf;
 var pDueFf;
 var placeImage='static/assets/icons/mapmark.svg';
 var luoghi;
-var userLocation; // Locazione dell'utente qunado autorizza la localizzazione
+var userLocation;// Locazione dell'utente qunado autorizza la localizzazione
+var marker;
+var infwindows;
 
+var maps;
 // Per controllare le direzioni
 var dd; //DirectionDisplay
 var ds = new google.maps.DirectionsService(); //DirectionService
 var geoCoder = new google.maps.Geocoder();
 
  var contentString = '<div class="contenuto">'+
-				'<h1 class="firstTitle">Luogo</h1>'+
-                '<input id="textluogo" type="text" value="From">'+
-                '<input class="miaPosizione" name="luogo" type="button" value="Use my position" onclick="impostaLocazzione(this)">'+
+				'<h4 class="title">Reach Luogo</h4>'+
      '<div id="tipoViaggio">'+
-     '<div class="stato31"><div class="viaggio"><label><input type="radio" name="travelModeluogo" value="DRIVING" checked /> Driving</label></div>'+
-     '<div class="viaggio"><label><input type="radio" name="travelModeluogo" value="BICYCLING" /> Bicylcing</label></div></div>'+
+     '<div class="stato31"><div class="viaggio"><label><input type="radio" name="travelModeluogo" value="DRIVING" checked />Car</label></div>'+
+     '<div class="viaggio"><label><input type="radio" name="travelModeluogo" value="BICYCLING" />Bike</label></div></div>'+
      '<div class="stato31"><div class="viaggio"><label><input type="radio" name="travelModeluogo" value="TRANSIT" /> Public transport</label></div>'+
-     '<div class="viaggio"></div><div class="viaggio"><label><input type="radio" name="travelModeluogo" value="WALKING" /> Walking</label></div'+
+     '<div class="viaggio"></div><div class="viaggio"><label><input type="radio" name="travelModeluogo" value="WALKING" /> On foot</label></div>'+
      '</div></div>'+
 '<input class="direzione" type="submit" value="Get Directions" name="luogo" onclick="calcRoute(this)">'+
 				'</div>';
@@ -60,9 +61,9 @@ function initialize() {
           zoom: 15,
 		  mapTypeControlOptions: {mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'style']}
         };
-
+        
         mapV = new google.maps.Map(document.getElementById('map'),mapOptions);
-        dd = new google.maps.DirectionsRenderer({ draggable: true });
+        dd = new google.maps.DirectionsRenderer();
         dd.setMap(mapV);
 
 		    pUnoGf = new google.maps.KmlLayer({
@@ -85,31 +86,27 @@ function initialize() {
         url:'https://sites.google.com/site/publickmlstorage/files/povo2gf.kml',
         suppressInfoWindows:true});
 
-        var bords= new google.maps.LatLngBounds(new google.maps.LatLng(46.068599,11.149404),new google.maps.LatLng(46.067678,11.150337));
-        var ggo= new google.maps.GroundOverlay('https://sites.google.com/site/publickmlstorage/files/Povo2firstfloor.svg',bords);
-        ggo.setMap(mapV);
 		//Associate the styled map with the MapTypeId and set it to display.
 		mapV.mapTypes.set('style', styledMap);
 		mapV.setMapTypeId('style');
         //Creo i marcatori dei vari aree dell'università di trento
-        luoghi=[['Povo 1',46.066966, 11.150452],
-                ['Povo 2',46.068144, 11.150530]];
+        luoghi=[['Povo A',46.066966, 11.150452],
+                ['Povo B',46.068144, 11.150530]];
     
-        var marker, k;
+        var k;
+        marker= [];
+        infwindows = [];
         for (k = 0; k < luoghi.length; k++) { 
-        marker = new google.maps.Marker({
+        marker[k] = new google.maps.Marker({
         position: new google.maps.LatLng(luoghi[k][1], luoghi[k][2]),
         icon: new google.maps.MarkerImage(placeImage,
         null, null, null, new google.maps.Size(48,48)),
         draggable: false,
         title: luoghi[k][0],
         map: mapV });
-        makeInfoWindow(marker,contentString);
+        makeInfoWindow(marker[k],contentString);
     }
     
-    //uso la geolocalizzazione per determinare la posizione dell'utente
-    localizzazione();
-
     // Resize stuff...
     google.maps.event.addDomListener(window, "resize", function() {
         var center = mapV.getCenter();
@@ -139,9 +136,10 @@ function localizzazione(){
 }
 //Altra Parte
 function cambiaPiano(aula){
-    switch(aula.charAt(0))
+    dd.set('directions',null);
+    switch(aula.toLowerCase().charAt(0))
     {
-      case "a":
+        case "a":
           if(aula.charAt(1)=="1"){
             pUnoFf.setMap(null);
             pUnoGf.preserveViewport=false;
@@ -154,7 +152,7 @@ function cambiaPiano(aula){
             pUnoGf.setMap(null);
           }
           break;
-      case "b":
+        case "b":
       if(aula.charAt(3)=="6" || aula.charAt(3)=="7"){
             pDueFf.preserveViewport=false;
             pDueFf.setMap(mapV);
@@ -175,14 +173,14 @@ function makeInfoWindow(marker, message) {
             var ris = message.replace("Luogo",luogo);
             luogo=luogo.replace(/ /g,'');
             ris = ris.replace(/luogo/g,luogo);
-            var infoWindow = new google.maps.InfoWindow({
+            var infoWindow=new google.maps.InfoWindow({
                 content: ris,
-                maxWidth: 400
+                maxWidth: 300
             });
-
             google.maps.event.addListener(marker, 'click', function () {
                 infoWindow.open(mapV, marker);
             });
+            infwindows.push(infoWindow);
 }
 function calcRoute(obj) {
                 //In che modo si pensa di attraversare il percorso
@@ -193,19 +191,23 @@ function calcRoute(obj) {
                     if(tmp[i].checked==true)
                         modoViaggio=tmp[i].value;
                 }
-                alert(modoViaggio);
                 //Imposto il luogo di partenza, che potrebbe essere o la locazzione dell'utente o un luogo scelto da lui
-                var start = document.getElementById("text"+obj.name).value;
+                var start = userLocation;
                 //Imposto il luogo di arrivo
-                var index = obj.name.charAt(obj.name.length-1);
+                var index = obj.name.charAt(obj.name.length-1).toLowerCase();
+                switch(index){
+                        case 'a':index=0;break;
+                        case 'b':index=1;break;
+                }
                 var k = parseInt(index);
-				var end = new google.maps.LatLng(luoghi[k-1][1],luoghi[k-1][2]);
+				var end = new google.maps.LatLng(luoghi[k][1],luoghi[k][2]);
 				var request = {
 					origin:start,
 					destination:end,
 					travelMode: google.maps.DirectionsTravelMode[modoViaggio]
 				};
 				
+                closeInfoWindows();
 				ds.route(request, function(response, status) {
 					if (status == google.maps.DirectionsStatus.OK) {
 						dd.setDirections(response);
@@ -246,9 +248,6 @@ function coordinate(position){
 		}
 	});
 }
-function impostaLocazzione(tmp){
-    document.getElementById("text"+tmp.name).value=userLocation;
-}
 function porblemiNellaLocalizzazione(error) {
     if (error.code == 1) {
         alert("The user didn't allow the geo-localization");
@@ -261,4 +260,51 @@ function porblemiNellaLocalizzazione(error) {
     }
 }
 
+function closeInfoWindows(){
+    for (var i=0; i<infwindows.length; i++){
+        var test=infwindows[i];
+        if(test)
+        {infwindows[i].close();}
+    }
+}
+
+/*Metodo per calcolare la distanza tra due punti desiderati*/
+function distanza(from,to) {
+  var service = new google.maps.DistanceMatrixService();
+  service.getDistanceMatrix(
+    {
+      origins: [from],
+      destinations: [to],
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.METRIC,
+      avoidHighways: false,
+      avoidTolls: true
+    }, callback);
+}
+
+function callback(response, status) {
+  if (status == google.maps.DistanceMatrixStatus.OK) {
+    var origins = response.originAddresses;
+    var destinations = response.destinationAddresses;
+    var outputDiv = document.getElementById('testo');
+    outputDiv.innerHTML = '';
+    for (var i = 0; i < origins.length; i++) {
+      var results = response.rows[i].elements;
+      for (var j = 0; j < results.length; j++) {
+        outputDiv.innerHTML += results[j].distance.text; 
+      }
+    }
+  } else {
+      alert('Error was: ' + status);
+  }
+}
+
+//Function to move a element to an other
+function Swap(to){
+    var f = document.getElementById("map");
+    var t = document.getElementById(to);
+
+    t.appendChild(f);
+}
 google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', localizzazione);
