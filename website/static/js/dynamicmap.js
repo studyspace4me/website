@@ -136,6 +136,7 @@ function localizzazione(){
 }
 //Altra Parte
 function cambiaPiano(aula){
+    closeInfoWindows();
     dd.set('directions',null);
     switch(aula.toLowerCase().charAt(0))
     {
@@ -194,10 +195,12 @@ function calcRoute(obj) {
                 //Imposto il luogo di partenza, che potrebbe essere o la locazzione dell'utente o un luogo scelto da lui
                 var start = userLocation;
                 //Imposto il luogo di arrivo
-                var index = obj.name.charAt(obj.name.length-1).toLowerCase();
-                switch(index){
-                        case 'a':index=0;break;
-                        case 'b':index=1;break;
+                var index = obj.name.charAt(obj.name.length-1);
+                switch(index.toLowerCase()){
+                        case 'a':index=0;
+                            break;
+                        case 'b':index=1;
+                            break;
                 }
                 var k = parseInt(index);
 				var end = new google.maps.LatLng(luoghi[k][1],luoghi[k][2]);

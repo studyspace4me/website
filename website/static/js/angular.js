@@ -6,7 +6,7 @@ customInterpolationApp.config(function($interpolateProvider) {
 });
 
 function dashboardController($http, $scope) {
-    $http.get("static/json/data.json").success(function (data) {
+    $http.get("/api/rooms/").success(function (data) {
         $scope.results = data;
 
         $scope.getBackground = function (feedback) {
@@ -20,10 +20,10 @@ function dashboardController($http, $scope) {
             return  { 'background-color': 'transparent' };
         };
         $scope.getLastUpdate = function (lastUpdate) {
-            return "Updated " + moment(lastUpdate).fromNow();
+            return "Updated " + lastUpdate;
         };
         $scope.getTime = function (until) {
-            return moment(until).fromNow(true);
+            return "Next lecture " + moment(until).fromNow();
         };
         $scope.getFavoriteImage = function (favorite) {
             if (favorite == true)

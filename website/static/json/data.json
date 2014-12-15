@@ -1,28 +1,31 @@
-[
-    {
-        "name": "B106",
-        "location": "Povo B, First Floor",
-        "status": {
-            "reason": "lecture",
-            "busy": false,
-            "until": "2014-12-15 17:00:00"
+{
+    "status": "ok",
+    "rooms": [
+        {
+            "name": "B106",
+            "location": "Povo B, First Floor",
+            "status": {
+                "reason": "lecture",
+                "busy": false,
+                "until": "2014-12-15 17:00:00"
+            },
+            "type": "computer",
+            "feedback": "Empty",
+            "lastUpdate": "2014-12-15 01:48:10",
+            "favorite": true
         },
-        "type": "computer",
-        "feedback": "Empty",
-        "lastUpdate": "2014-12-15 01:48:10",
-        "favorite": true
-    },
-    {
-        "name": "A203",
-        "location": "Povo A, First Floor",
-        "status": {
-            "reason": "lecture",
-            "busy": false,
-            "until": "2014-12-15 14:00:00"
-        },
-        "type": "study",
-        "feedback": "Full",
-        "lastUpdate": "2014-12-15 02:15:10",
-        "favorite": false
-    }
-]
+        {
+            "name": "A203",
+            "location": "Povo A, First Floor",
+            "status": {
+                "reason": "lecture",
+                "busy": false,
+                "until": "2014-12-15 14:00:00"
+            },
+            "type": "study",
+            "feedback": "Full",
+            "lastUpdate": "2014-12-15 02:15:10",
+            "favorite": false
+        }
+    ]
+}
