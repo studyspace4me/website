@@ -46,24 +46,35 @@
     </div>
 
     <div id="dashboardSection" ng-app="customInterpolationApp" ng-controller="dashboardController">
-
         <!--ORDER BY-->
-        <div class="row" id="orderbyContent">
+        <div class="row">
             <div class="small-12 large-centered columns">
                 <div class="row collapse prefix-radius">
                     <div class="icon-bar four-up">
-                        <a class="item" id="all">
-                            <img src="{{ 'website:static/assets/icons/all.svg' | static_url }}">
-                        </a>
-                        <a class="item" id="favorites" ng-click="">
-                            <img src="{{ 'website:static/assets/icons/favorites.svg' | static_url }}">
-                        </a>
-                        <a class="item" id="nearest">
-                            <img src="{{ 'website:static/assets/icons/near.svg' | static_url }}">
-                        </a>
-                        <a class="item" id="crowding">
-                            <img src="{{ 'website:static/assets/icons/crowd.svg' | static_url }}">
-                        </a>
+                        <div ng-click="fetch('all')">
+                            <a class="item">
+                                <img src="{{ 'website:static/assets/icons/all.svg' | static_url }}">
+                            </a>
+                            <div id="all" class="iconStatus"></div>
+                        </div>
+                        <div ng-click="fetch('favorites')">
+                            <a class="item">
+                                <img src="{{ 'website:static/assets/icons/favorites.svg' | static_url }}">
+                            </a>
+                            <div id="favorites" class="iconStatus"></div>
+                        </div>
+                        <div ng-click="fetch('nearest')">
+                            <a class="item">
+                                <img src="{{ 'website:static/assets/icons/near.svg' | static_url }}">
+                            </a>
+                            <div id="nearest" class="iconStatus"></div>
+                        </div>
+                        <div ng-click="fetch('crowding')">
+                            <a class="item">
+                                <img src="{{ 'website:static/assets/icons/crowd.svg' | static_url }}">
+                            </a>
+                            <div id="crowding" class="iconStatus"></div>
+                        </div>
                     </div>
                 </div>
             </div>

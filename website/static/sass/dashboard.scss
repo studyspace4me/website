@@ -4,12 +4,30 @@
 
 .icon-bar {
   background-color: white;
+  margin-top: 13px;
+  
   #border: 1px solid #d1d1d1;
-  -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
-  box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.20);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.20);
   border-top-left-radius: 2px;
   margin-bottom: 10px;
-  a {
+  div {
+    padding: 0px;
+    margin: 0px;
+    cursor: pointer;
+
+    .item {
+      padding: 1px; //just set a value to get the icon bar and its elements sized right (lol)
+    }
+
+    .iconStatus {
+      height: 2px;
+      width: 100%;
+      background-color: transparent; //initial value
+      margin: 0px;
+      padding: 0px;
+    }
+
     &:hover {
       background-color: #f2f2f2;
     }
@@ -24,13 +42,15 @@
     .searchInputContainer {
       width: 85%;
       float: left; //to display button aligned
-      display: flex; //fixes a bug on firefox which doesn't make the input stay aligned
+      display: flex; //fixes a problem which doesn't make the input stay aligned on firefox
 
       .searchInput {
         height: 32px;
         display: table-cell;
         vertical-align: middle;
         border-right: none;
+        border-top-left-radius: 2px;
+        border-bottom-left-radius: 2px;
 
         //fixes a margin between the tab-bar and the content section on firefox
         margin-bottom: 0px;
@@ -52,6 +72,8 @@
       float: right !important; //makes the button stay aligned to the input on chrome (!important to overwrite some value inherited from foundation I guess)
 
       .searchButton {
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
         color: #333;
         height: 32px;
         background-color: #f8f8f8;
@@ -111,7 +133,7 @@
         width: 40px;
         float: right; //puts the favorite star on the right of the result header
         top: 28px;
-        right: 40px; //they keep the favorite star on that side
+        right: 40px; //they keep the favorite star on left side
       }
     }
   }
@@ -165,7 +187,7 @@
   }
 }
 
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 800px) {
   .result {
     .header {
       .panel {
