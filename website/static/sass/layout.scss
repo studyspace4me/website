@@ -24,11 +24,11 @@ body {
   .main-content{
     overflow-y: scroll;
     height: 100%;
+    margin-top: 13px;
 
     //fixes a bug on firefox which makes the content stay in right side of the page
     width: 100%;
     float: left;
-    margin: 0px;
   }
 }
 
@@ -80,3 +80,8 @@ textarea {
   background-color: #fafafa;
   height: 100px;
 }
+
+::-webkit-input-placeholder { font-style: italic; } //chrome
+::-moz-placeholder { font-style: italic; } //firefox 19+
+:-ms-input-placeholder { font-style: italic; } //ie
+input:-moz-placeholder { font-style: italic; }

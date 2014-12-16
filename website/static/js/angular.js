@@ -7,12 +7,16 @@ customInterpolationApp.config(function($interpolateProvider) {
 
 function dashboardController($http, $scope) {
     $scope.fetch = function(type) {
-        $http.get("/api/rooms/").success(function (data) {
+        $http.get("static/json/data.json").success(function (data) {
             if(type == 'all') {
                 $scope.results = data;
+                $scope.orderByPredicate = 'name';
+                $scope.filterIconBarQuery = "";
             }
             else if(type == 'favorites'){
-
+                $scope.results = data;
+                $scope.orderByPredicate = 'name';
+                $scope.filterIconBarQuery = { favorite : "true" };
             }
             else if(type == 'nearest'){
 
@@ -24,6 +28,11 @@ function dashboardController($http, $scope) {
             //highlight the selected filter/orderby option
             $('.iconStatus').css('background-color', 'transparent');
             $('#' + type).css('background-color', 'orange');
+
+            $scope.searchClick = function (){
+              $scope.filterSearchBarQuery = { name: $scope.searchQuery };
+              $scope.orderByPredicate = 'name';
+            };
 
             $scope.getBackground = function (feedback) {
                 if (feedback == "Full")

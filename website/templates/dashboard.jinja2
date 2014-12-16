@@ -27,10 +27,10 @@
             <div class="small-8 small-centered columns">
                 <div class="row collapse searchBoxContent">
                     <div class="small-8 small-centered columns searchInputContainer">
-                        <input class="searchInput" type="text">
+                        <input id="searchInput" class="input" type="text" ng-model="searchQuery" placeholder="Room Name">
                     </div>
-                    <div class="small-4 small-centered columns searchButtonContainer">
-                        <a href="#" class="button postfix searchButton">
+                    <div class="small-4 small-centered columns searchButtonContainer" id="searchButton" ng-click="searchClick()">
+                        <a class="button postfix">
                             <img class="searchImage" src="{{ 'website:static/assets/icons/search.svg'  | static_url }}"/>
                         </a>
                     </div>
@@ -45,7 +45,7 @@
         <div id="map" style="width: inherit; height: inherit;"></div>
     </div>
 
-    <div id="dashboardSection" ng-app="customInterpolationApp" ng-controller="dashboardController">
+    <div id="dashboardSection">
         <!--ORDER BY-->
         <div class="row">
             <div class="small-12 large-centered columns">
@@ -81,11 +81,11 @@
         </div>
 
         <!--RESULT-->
-        <div class="result" ng-repeat="x in results.rooms">
+        <div class="result" ng-repeat="x in results.rooms | orderBy:orderByPredicate:false | filter:filterIconBarQuery:filterIconBarStrict | filter:filterSearchBarQuery:false">
             <!--HEADER-->
             <div class="row header" id="headerResult">
                 <div class="small-12 large-centered columns">
-                    <div class="panel" ng-click="showContent(x.name)">
+                    <div class="panel" ng-click="showContent(x.name);">
                            <span class="iconAndName">
                                 <img ng-src="[[getRoomIcon(x.type)]]" class="roomIcon"><img>
                                 &nbsp;
