@@ -8,6 +8,8 @@ customInterpolationApp.config(function($interpolateProvider) {
 function dashboardController($http, $scope) {
     $scope.fetch = function(type) {
         $http.get("static/json/data.json").success(function (data) {
+            //$scope.filterBusy = { status.busy : "false" };
+
             if(type == 'all') {
                 $scope.results = data;
                 $scope.orderByPredicate = 'name';
@@ -19,10 +21,17 @@ function dashboardController($http, $scope) {
                 $scope.filterIconBarQuery = { favorite : "true" };
             }
             else if(type == 'nearest'){
-
+                $scope.results = data;
+                $scope.orderByPredicate = "";
+                $scope.filterIconBarQuery = "";
             }
             else if(type == 'crowding'){
+                var rooms = data["rooms"];
+                rooms.sort(crowdingComparer);
 
+                $scope.results = data;
+                $scope.orderByPredicate = "";
+                $scope.filterIconBarQuery = "";
             }
 
             //highlight the selected filter/orderby option
@@ -41,10 +50,15 @@ function dashboardController($http, $scope) {
                     return { 'background-color': 'orange' };
                 else if (feedback == "Empty")
                     return  { 'background-color': 'green' };
+                else if(feedback == "None")
+                    return { 'background-color': 'gray' };
 
                 return  { 'background-color': 'transparent' };
             };
             $scope.getLastUpdate = function (lastUpdate) {
+                if (lastUpdate == "null")
+                    return "Not updated yet";
+
                 return "Updated " + moment(lastUpdate).fromNow();
             };
             $scope.getTime = function (until) {
@@ -78,13 +92,6 @@ function dashboardController($http, $scope) {
                 else
                     $("#" + id).attr('src', 'static/assets/icons/emptyFavorite.svg');
             };
-            $scope.reload = function () {
-                //$route.reload();
-                alert('lol');
-            };
-            $scope.order = function () {
-
-            };
         });
     };
 
@@ -92,4 +99,27 @@ function dashboardController($http, $scope) {
         $scope.fetch('all');
     };
     initialize();
-}
+};
+
+//empty is small than every other status
+//none is greater than every other status
+//full is grater than half so then half is smaller than full
+var crowdingComparer= function(a,b) {
+    if (a["feedback"] == b["feedback"])
+        return 0;
+
+    else if (a["feedback"] == "Empty")
+        return -1;
+    else if (b["feedback"] == "Empty")
+        return 1;
+
+    else if (a["feedback"] == "None")
+        return 1;
+    else if (b["feedback"] == "None")
+        return -1;
+
+    else if (a["feedback"] == "Full" &&  b["feedback"] == "Half")
+        return 1;
+    else if (a["feedback"] == "Half" && b["feedback"] == "Full")
+        return -1;
+};

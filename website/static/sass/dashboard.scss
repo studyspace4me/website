@@ -119,20 +119,12 @@
       border: solid transparent;
       margin-bottom: 1px;
       padding-bottom: 18px;
-      .full {
-        background-color: red;
-      }
-      .empty {
-        background-color: green;
-      }
-      .half {
-        background-color: orange;
-      }
+
       .favoriteIcon {
         width: 40px;
         float: right; //puts the favorite star on the right of the result header
-        top: 28px;
-        right: 40px; //they keep the favorite star on left side
+        top: 28px; //keeps the favorite star on top
+        right: 40px; //keeps the favorite star on the right side
       }
     }
   }
@@ -147,9 +139,6 @@
       .title {
         color: black;
         background-color: transparent;
-      }
-      .location {
-        background-color: gray;
       }
       .status {
         font-size: 11px;
