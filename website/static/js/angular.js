@@ -5,9 +5,9 @@ customInterpolationApp.config(function($interpolateProvider) {
     $interpolateProvider.endSymbol(']]');
 });
 
-var selectedOrderby = "Name"; //initial value
-
 function dashboardController($http, $scope) {
+    var selectedOrderby = "Name"; //initial value
+
     $scope.fetch = function(filter) {
         $http.get("static/json/data.json").success(function (data) {
             $scope.results = data;
@@ -121,9 +121,9 @@ function dashboardController($http, $scope) {
     initialize();
 };
 
-//empty is small than every other status
+//empty is smaller than every other status
 //none is greater than every other status
-//full is grater than half so then half is smaller than full
+//full is greater than half so then half is smaller than full
 var crowdingComparer= function(a,b) {
     if (a["feedback"] == b["feedback"])
         return 0;
@@ -142,8 +142,4 @@ var crowdingComparer= function(a,b) {
         return 1;
     else if (a["feedback"] == "Half" && b["feedback"] == "Full")
         return -1;
-};
-
-var distanceComparer = function (){
-
 };

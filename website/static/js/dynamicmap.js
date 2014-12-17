@@ -130,7 +130,7 @@ function getMap(id) {
 
 function localizzazione(){
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(coordinate,porblemiNellaLocalizzazione,{
+        navigator.geolocation.getCurrentPosition(coordinate,problemiNellaLocalizzazione,{
             timeout: 10000,
             enableHighAccuracy: true,
             maximumAge: Infinity});
@@ -257,7 +257,7 @@ function coordinate(position){
         }
     });
 }
-function porblemiNellaLocalizzazione(error) {
+function problemiNellaLocalizzazione(error) {
     if (error.code == 1) {
         alert("The user didn't allow the geo-localization");
     } else if (error.code == 2) {
@@ -290,16 +290,20 @@ function callback(response, status) {
             }
         }
     } else {
-        alert('Error was: ' + status);
+        alert('Error: ' + status);
     }
 }
 
 //Function to move a element to an other
+var from = "hiddenMapContainer";
 function Swap(to){
-    var f = document.getElementById("map");
-    var t = document.getElementById(to);
+    if(from != to) {
+        var f = document.getElementById(from).firstElementChild;
+        var t = document.getElementById(to);
 
-    t.appendChild(f);
+        t.appendChild(f);
+        from = to;
+    }
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 google.maps.event.addDomListener(window, 'load', localizzazione);
