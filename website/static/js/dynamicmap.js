@@ -296,8 +296,8 @@ function callback(response, status) {
 
 //Function to move a element to an other
 var from = "hiddenMapContainer";
-function Swap(to){
-    if(from != to) {
+function Move(to) {
+    if (from != to) {
         var f = document.getElementById(from).firstElementChild;
         var t = document.getElementById(to);
 

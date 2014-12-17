@@ -16,7 +16,9 @@ function dashboardController($http, $scope) {
             if(filter == 'all')
                 $scope.filterIconBarQuery = "";
             else if(filter == 'favorites')
-                $scope.filterIconBarQuery = { favorite : "true" };
+                $scope.filterIconBarQuery = { favorite: "true" };
+
+            Move("hiddenMapContainer"); //a trick to keep the map in a known container
 
             //highlight the selected filter option
             $('.iconStatus').css('background-color', 'transparent');
@@ -46,6 +48,7 @@ function dashboardController($http, $scope) {
                     //TODO
                 }
 
+                $(".contentPanel").hide('fast'); //close all results
                 selectedOrderby = type;
 
                 ////highlight the selected orderby option
@@ -102,7 +105,7 @@ function dashboardController($http, $scope) {
                     $("#" + id).slideUp();
 
                 getMap(id);
-                Swap("map" + id);
+                Move("map" + id);
                 google.maps.event.trigger(mapV, "resize"); // resize map
             };
             $scope.changeFavorite = function (id) {
