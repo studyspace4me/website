@@ -75,8 +75,8 @@
                     <dl class="sub-nav">
                         <dt><strong>Orderby:</strong></dt>
                         <dd><a class="orderbyItem" id="orderbyName" ng-click="orderbyFunc('Name')">Name</a></dd>
-                        <dd><a class="orderbyItem" id="orderbyCrowding" ng-click="orderbyFunc('Crowding')">Crowding</a></dd>
-                        <dd><a class="orderbyItem" id="orderbyAvailabilityTime" ng-click="orderbyFunc('AvailabilityTime')">Availability Time</a></dd>
+                        <dd><a class="orderbyItem" id="orderbyCrowding" ng-click="orderbyFunc('Crowding')">Less Crowded</a></dd>
+                        <dd><a class="orderbyItem" id="orderbyAvailabilityTime" ng-click="orderbyFunc('AvailabilityTime')">More Availability</a></dd>
                         <dd><a class="orderbyItem" id="orderbyLatestUpdate" ng-click="orderbyFunc('LatestUpdate')">Latest Update</a></dd>
                         {#<dd><a class="orderbyItem" id="orderbyNearest" ng-click="orderbyFunc('Nearest')">Nearest</a></dd>#}
                     </dl>
@@ -85,7 +85,7 @@
          </div>
 
         <!--RESULT-->
-        <div class="result" ng-repeat="x in results.rooms | filter:filterIconBarQuery:false | filter:filterSearchBarQuery:false | filter:filterBusy:false | orderBy:orderbyPredicate:orderbyReverse">
+        <div class="result" ng-repeat="x in results.rooms | filter: filterBusy :false | filter:filterIconBarQuery:false | filter:filterSearchBarQuery:false | orderBy:orderbyPredicate:orderbyReverse">
             <!--HEADER-->
             <div class="row header" id="headerResult">
                 <div class="small-12 large-centered columns">

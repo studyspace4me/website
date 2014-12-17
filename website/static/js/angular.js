@@ -11,14 +11,14 @@ function dashboardController($http, $scope) {
     $scope.fetch = function(filter) {
         $http.get("static/json/data.json").success(function (data) {
             $scope.results = data;
-            //$scope.filterBusy = { "status.busy" : "false" };
+            $scope.filterBusy = { status : { busy : "false" } }; //display only available rooms
 
             if(filter == 'all')
                 $scope.filterIconBarQuery = "";
             else if(filter == 'favorites')
                 $scope.filterIconBarQuery = { favorite: "true" };
 
-            Move("hiddenMapContainer"); //a trick to keep the map in a known container
+            Move("hiddenMapContainer"); //a trick to keep the map in a known container, fixes the invisible map bug
 
             //highlight the selected filter option
             $('.iconStatus').css('background-color', 'transparent');
@@ -122,27 +122,27 @@ function dashboardController($http, $scope) {
         $scope.fetch('all');
     };
     initialize();
-};
 
-//empty is smaller than every other status
-//none is greater than every other status
-//full is greater than half so then half is smaller than full
-var crowdingComparer= function(a,b) {
-    if (a["feedback"] == b["feedback"])
-        return 0;
+    //empty is smaller than every other status
+    //none is greater than every other status
+    //full is greater than half so then half is smaller than full
+    var crowdingComparer= function(a,b) {
+        if (a["feedback"] == b["feedback"])
+            return 0;
 
-    else if (a["feedback"] == "Empty")
-        return -1;
-    else if (b["feedback"] == "Empty")
-        return 1;
+        else if (a["feedback"] == "Empty")
+            return -1;
+        else if (b["feedback"] == "Empty")
+            return 1;
 
-    else if (a["feedback"] == "None")
-        return 1;
-    else if (b["feedback"] == "None")
-        return -1;
+        else if (a["feedback"] == "None")
+            return 1;
+        else if (b["feedback"] == "None")
+            return -1;
 
-    else if (a["feedback"] == "Full" &&  b["feedback"] == "Half")
-        return 1;
-    else if (a["feedback"] == "Half" && b["feedback"] == "Full")
-        return -1;
+        else if (a["feedback"] == "Full" && b["feedback"] == "Half")
+            return 1;
+        else if (a["feedback"] == "Half" && b["feedback"] == "Full")
+            return -1;
+    };
 };
