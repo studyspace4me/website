@@ -278,17 +278,20 @@ function closeInfoWindows(){
 }
 
 /*Metodo per calcolare la distanza tra due punti desiderati*/
-function distanza(from,to) {
+function distanza(aula) {
+    var from = navigator.geolocation.getCurrentPosition();
+    alert(from);
+    /*
     var service = new google.maps.DistanceMatrixService();
-    service.getDistanceMatrix(
-        {
+    service.getDistanceMatrix({
             origins: [from],
             destinations: [to],
             travelMode: google.maps.TravelMode.DRIVING,
             unitSystem: google.maps.UnitSystem.METRIC,
             avoidHighways: false,
             avoidTolls: true
-        }, callback);
+        }, callback
+    );*/
 }
 
 function callback(response, status) {

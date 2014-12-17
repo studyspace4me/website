@@ -21,7 +21,7 @@ function dashboardController($http, $scope) {
                 $scope.filterIconBarQuery = { favorite : "true" };
             }
             else if(type == 'nearest'){
-                $scope.results = data;
+                $scope.results = null;
                 $scope.orderByPredicate = "";
                 $scope.filterIconBarQuery = "";
             }
@@ -122,4 +122,8 @@ var crowdingComparer= function(a,b) {
         return 1;
     else if (a["feedback"] == "Half" && b["feedback"] == "Full")
         return -1;
+};
+
+var distanceComparer = function (){
+
 };
