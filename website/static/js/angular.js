@@ -5,44 +5,64 @@ customInterpolationApp.config(function($interpolateProvider) {
     $interpolateProvider.endSymbol(']]');
 });
 
+var selectedOrderby = "Name"; //initial value
+
 function dashboardController($http, $scope) {
-    $scope.fetch = function(type) {
+    $scope.fetch = function(filter) {
         $http.get("static/json/data.json").success(function (data) {
-            //$scope.filterBusy = { status.busy : "false" };
+            $scope.results = data;
+            //$scope.filterBusy = { "status.busy" : "false" };
 
-            if(type == 'all') {
-                $scope.results = data;
-                $scope.orderByPredicate = 'name';
+            if(filter == 'all')
                 $scope.filterIconBarQuery = "";
-            }
-            else if(type == 'favorites'){
-                $scope.results = data;
-                $scope.orderByPredicate = 'name';
+            else if(filter == 'favorites')
                 $scope.filterIconBarQuery = { favorite : "true" };
-            }
-            else if(type == 'nearest'){
-                $scope.results = null;
-                $scope.orderByPredicate = "";
-                $scope.filterIconBarQuery = "";
-            }
-            else if(type == 'crowding'){
-                var rooms = data["rooms"];
-                rooms.sort(crowdingComparer);
 
-                $scope.results = data;
-                $scope.orderByPredicate = "";
-                $scope.filterIconBarQuery = "";
-            }
-
-            //highlight the selected filter/orderby option
+            //highlight the selected filter option
             $('.iconStatus').css('background-color', 'transparent');
-            $('#' + type).css('background-color', 'orange');
+            $('#' + filter).css('background-color', 'orange');
+
+            var orderby = function(type) {
+                $scope.orderbyReverse = false;
+
+                if (type == "Name") {
+                    $scope.orderbyPredicate = "name";
+                }
+                else if (type == "Crowding") {
+                    var rooms = data["rooms"];
+                    rooms.sort(crowdingComparer);
+
+                    $scope.results = data;
+                    $scope.orderbyPredicate = "";
+                }
+                else if (type == "AvailabilityTime"){
+                    $scope.orderbyPredicate = "status.until";
+                    $scope.orderbyReverse = true; //to get it from more available to less available
+                }
+                else if(type == "LatestUpdate"){
+                    $scope.orderbyPredicate = "lastUpdate";
+                }
+                else if (type == "Nearest") {
+                    //TODO
+                }
+
+                selectedOrderby = type;
+
+                ////highlight the selected orderby option
+                $(".orderbyItem").css('color', '#999999');
+                $(".orderbyItem").css('background-color', 'transparent');
+
+                $("#orderby" + type).css('color', 'white');
+                $("#orderby" + type).css('background-color', '#ef8228');
+            };
+
+            orderby(selectedOrderby);
 
             $scope.searchClick = function (){
               $scope.filterSearchBarQuery = { name: $scope.searchQuery };
               $scope.orderByPredicate = 'name';
             };
-
+            $scope.orderbyFunc = orderby;
             $scope.getBackground = function (feedback) {
                 if (feedback == "Full")
                     return { 'background-color': 'red' };

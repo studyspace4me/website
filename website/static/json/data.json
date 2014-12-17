@@ -7,11 +7,11 @@
             "status": {
                 "reason": "lecture",
                 "busy": false,
-                "until": "2014-12-15 14:00:00"
+                "until": "2014-12-17 08:00:00"
             },
             "type": "study",
             "feedback": "Half",
-            "lastUpdate": "2014-12-15 02:15:10",
+            "lastUpdate": "2014-12-15 01:15:10",
             "favorite": false
         },
         {
@@ -20,11 +20,11 @@
             "status": {
                 "reason": "lecture",
                 "busy": false,
-                "until": "2014-12-15 14:00:00"
+                "until": "2014-12-17 19:00:00"
             },
             "type": "study",
             "feedback": "Full",
-            "lastUpdate": "2014-12-15 02:15:10",
+            "lastUpdate": "2014-12-15 04:15:10",
             "favorite": true
         },
         {
@@ -33,7 +33,7 @@
             "status": {
                 "reason": "lecture",
                 "busy": false,
-                "until": "2014-12-15 14:00:00"
+                "until": "2014-12-17 14:00:00"
             },
             "type": "lecture",
             "feedback": "None",
@@ -46,11 +46,11 @@
             "status": {
                 "reason": "lecture",
                 "busy": false,
-                "until": "2014-12-15 17:00:00"
+                "until": "2014-12-17 17:00:00"
             },
             "type": "computer",
             "feedback": "Empty",
-            "lastUpdate": "2014-12-15 01:48:10",
+            "lastUpdate": "2014-12-15 03:48:10",
             "favorite": true
         }
     ]

@@ -46,11 +46,11 @@
     </div>
 
     <div id="dashboardSection">
-        <!--ORDER BY-->
+        <!--FILTER-->
         <div class="row">
             <div class="small-12 large-centered columns">
                 <div class="row collapse prefix-radius">
-                    <div class="icon-bar four-up">
+                    <div class="icon-bar two-up">
                         <div ng-click="fetch('all')">
                             <a class="item">
                                 <img src="{{ 'website:static/assets/icons/all.svg' | static_url }}">
@@ -63,25 +63,29 @@
                             </a>
                             <div id="favorites" class="iconStatus"></div>
                         </div>
-                        <div ng-click="fetch('nearest')">
-                            <a class="item">
-                                <img src="{{ 'website:static/assets/icons/near.svg' | static_url }}">
-                            </a>
-                            <div id="nearest" class="iconStatus"></div>
-                        </div>
-                        <div ng-click="fetch('crowding')">
-                            <a class="item">
-                                <img src="{{ 'website:static/assets/icons/crowd.svg' | static_url }}">
-                            </a>
-                            <div id="crowding" class="iconStatus"></div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!--ORDERBY-->
+        <div class="row">
+            <div class="small-12 large-centered columns">
+                <div class="row collapse prefix-radius">
+                    <dl class="sub-nav">
+                        <dt><strong>Orderby:</strong></dt>
+                        <dd><a class="orderbyItem" id="orderbyName" ng-click="orderbyFunc('Name')">Name</a></dd>
+                        <dd><a class="orderbyItem" id="orderbyCrowding" ng-click="orderbyFunc('Crowding')">Crowding</a></dd>
+                        <dd><a class="orderbyItem" id="orderbyAvailabilityTime" ng-click="orderbyFunc('AvailabilityTime')">Availability Time</a></dd>
+                        <dd><a class="orderbyItem" id="orderbyLatestUpdate" ng-click="orderbyFunc('LatestUpdate')">Latest Update</a></dd>
+                        {#<dd><a class="orderbyItem" id="orderbyNearest" ng-click="orderbyFunc('Nearest')">Nearest</a></dd>#}
+                    </dl>
+                </div>
+            </div>
+         </div>
+
         <!--RESULT-->
-        <div class="result" ng-repeat="x in results.rooms | orderBy:orderByPredicate:false | filter:filterIconBarQuery:filterIconBarStrict | filter:filterSearchBarQuery:false">
+        <div class="result" ng-repeat="x in results.rooms | filter:filterIconBarQuery:false | filter:filterSearchBarQuery:false | filter:filterBusy:false | orderBy:orderbyPredicate:orderbyReverse">
             <!--HEADER-->
             <div class="row header" id="headerResult">
                 <div class="small-12 large-centered columns">
