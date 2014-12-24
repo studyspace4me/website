@@ -10,15 +10,14 @@ requires = ['pyramid',
             'pyramid_jinja2',
             'pyramid_chameleon',
             'pyramid_debugtoolbar',
-            'pyramid_tm',
-            'SQLAlchemy',
-            'transaction',
-            'zope.sqlalchemy',
             'cornice',
-            'waitress']
+            'waitress',
+            'pymongo',
+            'agendadisi',
+            'celery']
 
 setup(name='website',
-      version='0.3.0',
+      version='1.0.0',
       description='website',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
@@ -26,7 +25,7 @@ setup(name='website',
           "Framework :: Pylons",
           "Topic :: Internet :: WWW/HTTP",
           "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
-          ],
+      ],
       author='',
       author_email='',
       url='',
@@ -40,8 +39,6 @@ setup(name='website',
       entry_points="""\
       [paste.app_factory]
       main = website:main
-      [console_scripts]
-      initialize_ss4me_db = website.scripts.initializedb:main
       """,
       paster_plugins=['pyramid'],
-      )
+)
