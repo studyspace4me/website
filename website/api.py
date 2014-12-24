@@ -18,18 +18,20 @@ feedback = ["Empty", "Half", "Full"]
 def get_rooms(request):
     rl = []
     for room in mongodb.rooms.find():
-        r = {'name': room['name'], 'type': 'lecture', 'lastUpdate': format_time_momentjs(datetime.now()), 'feedback': 'Empty'}
+        r = {'name': room['name'], 'type': room.get('type', 'lecture'), 'lastUpdate': None,
+             'feedback': 'Empty', 'favorite': False}
         status = None
         status_known = False
-        if "2014-12-09" in room['occupation'].keys():
+        # if "2014-12-09" in room['occupation'].keys():
+        if str(date.today()) in room['occupation'].keys():
             curr_time = datetime.now().time()
-            occupations = room['occupation']["2014-12-09"]
+            occupations = room['occupation'][str(date.today())]
+            # occupations = room['occupation']["2014-12-09"]
             for s, e in occupations:
                 st = time(s, 0)
                 et = time(e, 0)
                 if st <= curr_time < et:
-                    status = {'busy': True, 'until': format_time_momentjs(datetime.combine(datetime.today(), et))}
-                    r['feedback'] = 'Full'
+                    status = {'busy': True, 'reason': 'lecture', 'until': format_time_momentjs(datetime.combine(datetime.today(), et))}
                     status_known = True
                     break
                 elif curr_time < st:
@@ -37,18 +39,14 @@ def get_rooms(request):
                     status_known = True
                     break
         if status_known is False:
-            status = {'busy': False, 'until': format_time_momentjs(datetime.now() + timedelta(days=1))}
+            status = {'busy': False, 'until': 'close'}
         r['status'] = status
-    #     r = {'name': room.id, 'location': room.location, 'favorite': False, 'type': room.type_str, 'feedback': feedback[random.randint(0, 2)],
-    #          'lastUpdate': format_time_momentjs(datetime.now()-timedelta(hours=random.randint(1, 5)))}
-    #     status = {'busy': False, 'until': format_time_momentjs(datetime.now() + timedelta(hours=random.randint(1, 6)))}
-    #     r['status'] = status
         rl.append(r)
     return {'status': 'ok', 'rooms': rl}
 
 
 # def my_view(request):
-#     try:
+# try:
 #         one = DBSession.query(Room).filter(Room.name == 'one').first()
 #     except DBAPIError:
 #         return Response(conn_err_msg, content_type='text/plain', status_int=500)

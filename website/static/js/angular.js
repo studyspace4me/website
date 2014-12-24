@@ -9,7 +9,7 @@ function dashboardController($http, $scope) {
     var selectedOrderby = "Name"; //initial value
 
     $scope.fetch = function(filter) {
-        $http.get("static/json/data.json").success(function (data) {
+        $http.get("/api/rooms/").success(function (data) {
             $scope.results = data;
             $scope.filterBusy = { status : { busy : "false" } }; //display only available rooms
 
@@ -84,8 +84,15 @@ function dashboardController($http, $scope) {
 
                 return "Updated " + moment(lastUpdate).fromNow();
             };
-            $scope.getTime = function (until) {
-                return "Next lecture " + moment(until).fromNow();
+            $scope.getTime = function (until, busy) {
+                if(until == "close") {
+                    return "Free until closing";
+                }
+                if(busy) {
+                    return "Free in " + moment(until).fromNow();
+                } else {
+                    return "Next lecture " + moment(until).fromNow();
+                }
             };
             $scope.getFavoriteImage = function (favorite) {
                 if (favorite == true)

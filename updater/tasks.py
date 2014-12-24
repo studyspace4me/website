@@ -8,15 +8,11 @@ from updater.celery import app
 client = MongoClient()
 mongodb = client.ss4me
 
-@app.task
-def add(x, y):
-    return x + y
-
 
 @app.task
-def update_rooms(today):
+def update_rooms():
     collection = mongodb.rooms
-    # today = date.today()
+    today = date.today()
     dotk = otk.daily_auto_init(today)
     for room in dotk.get_rooms():
         db_room = collection.find_one({'name': room})
