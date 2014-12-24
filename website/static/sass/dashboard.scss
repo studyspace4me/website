@@ -2,155 +2,194 @@
   width: 50px;
 }
 
+.two-up {
+  div {
+    width: 50%; //two elements in the icon-bar
+  }
+}
+
 .icon-bar {
   background-color: white;
+
   #border: 1px solid #d1d1d1;
-  -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
-  box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.20);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.20);
   border-top-left-radius: 2px;
   margin-bottom: 10px;
-  a {
+
+  div {
+    padding: 0px;
+    margin: 0px;
+    cursor: pointer;
+    border-right: 1px #000000;
+
+    .item {
+      padding: 1px; //just set a value to get the icon bar and its elements sized right (lol)
+    }
+
+    .iconStatus {
+      height: 2px;
+      width: 100%;
+      background-color: transparent; //initial value
+      margin: 0px;
+      padding: 0px;
+    }
+
     &:hover {
       background-color: #f2f2f2;
     }
   }
 }
 
-.tab-bar {
-  .searchInputContainer {
-    width: 80%;
-    float: left; //to display button aligned
-
-    input {
-      height: 32px;
-      display: table-cell;
-      vertical-align: middle;
-      border-right: none;
-
-      //fixes a margin between the tab-bar and the content section on firefox
-      margin-bottom: 0px;
-      &:focus {
-        background-color: #ffffff;
-        outline: none;
-        border: 1px solid #d0d0d0;
-        border-right: none;
-        //removes shadow
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
-      }
-    }
-  }
-
-  .searchButtonContainer {
-    width: 20%;
-
-    .button {
-      color: #333;
-      height: 32px;
-      background-color: #f8f8f8;
-      border: solid 1px #d3d3d3;
-      font-size: 12px;
-      text-align: center;
-
-      //fixes a margin between the tab-bar and the content section on firefox
-      margin-bottom: 0px;
-      &:hover {
-        background-color: #efefef;
-      }
-    }
-  }
-
-  img {
-    width: 15px;
-    vertical-align: middle;
-  }
-  .searchBox{
-    margin-top: 6px;
+.sub-nav{
+  a{
+     border-radius:2px;
   }
 }
 
-.result{
+.tab-bar {
+  .searchBoxContent {
+    margin-top:6px !important; //!important to overwrite some values inherited from foundation I guess
+    padding-top:0px !important;
+
+    .searchInputContainer {
+      width: 85%;
+      float: left; //to display button aligned
+      display: flex; //fixes a problem which doesn't make the input stay aligned on firefox
+
+      .input {
+        height: 32px;
+        display: table-cell;
+        vertical-align: middle;
+        border-right: none;
+        border-top-left-radius: 2px;
+        border-bottom-left-radius: 2px;
+
+        //fixes a margin between the tab-bar and the content section on firefox
+        margin-bottom: 0px;
+        &:focus {
+          background-color: #ffffff;
+          outline: none;
+          border: 1px solid #d0d0d0;
+          border-right: none;
+          //removes shadow
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          box-shadow: none;
+        }
+      }
+    }
+
+    .searchButtonContainer {
+      width: 15%;
+      float: right !important; //makes the button stay aligned to the input on chrome (!important to overwrite some value inherited from foundation I guess)
+
+      .button {
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        color: #333;
+        height: 32px;
+        background-color: #f8f8f8;
+        border: solid 1px #d3d3d3;
+        font-size: 12px;
+        text-align: center;
+
+        .searchImage {
+          width: 80%;
+          height: 80%;
+          margin-bottom: 5px;
+        }
+
+        //fixes a margin between the tab-bar and the content section on firefox
+        margin-bottom: 0px;
+        &:hover {
+          background-color: #efefef;
+        }
+      }
+    }
+
+    img {
+      width: 15px;
+      vertical-align: middle;
+    }
+  }
+}
+
+.result {
   margin-bottom: 5px;
 
-  .label{
+  .label {
     font-size: 14px;
   }
   .updated {
     background-color: transparent;
     color: gray;
   }
-  .header{
+  .header {
     .panel {
-      box-shadow: rgba(0,0,0,.2) 0px 2px 4px;
+      box-shadow: rgba(0, 0, 0, .2) 0px 2px 4px;
       border-radius: 2px;
       background: white;
       border: solid transparent;
       margin-bottom: 1px;
       padding-bottom: 18px;
-      .full{
-        background-color: red;
-      }
-      .empty{
-        background-color: green;
-      }
-      .half{
-        background-color: orange;
-      }
-      .favoriteIcon{
+
+      .favoriteIcon {
         width: 40px;
         float: right; //puts the favorite star on the right of the result header
-        top: 28px;
-        right: 40px; //they keep the favorite star on that side
+        top: 28px; //keeps the favorite star on top
+        right: 40px; //keeps the favorite star on the right side
       }
     }
   }
-  .content{
+  .content {
     .panel {
-      box-shadow: rgba(0,0,0,.2) 0px 4px 8px;
+      box-shadow: rgba(0, 0, 0, .2) 0px 4px 8px;
       margin: auto;
       background-color: #fbfbfb;
-      padding-bottom:0px;
+      padding-bottom: 0px;
+      display: none; //initial value
 
       .title {
         color: black;
         background-color: transparent;
       }
-      .location {
-        background-color: gray;
-      }
       .status {
         font-size: 11px;
       }
-      .detail{
+      .detail {
         background-color: transparent;
       }
-      .emptyStatus{
+      .emptyStatus {
         border-width: 1px;
-        color:green;
+        color: green;
       }
-      .averageStatus{
+      .averageStatus {
         border-width: 1px;
-        color:orange;
+        color: orange;
       }
-      .fullStatus{
+      .fullStatus {
         border-width: 1px;
-        color:red;
+        color: red;
       }
-      .feedback{
+      .feedback {
         margin-left: 20px;
+      }
+      .mapContainer {
+        width: 100%;
+        height: 250px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+
+        img {
+          max-width: none;
+        }
       }
     }
   }
 }
 
-.mapContainer{
-  img{
-    max-width: none;
-  }
-}
-
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 800px) {
   .result {
     .header {
       .panel {
@@ -174,49 +213,8 @@
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1300px) {
   .websiteName {
     display: none;
   }
-}
-
-//MAP
- #map div{
-            line-height: normal !important;
-        }
-                .firstTitle{
-            border-bottom: 2px black;
-        }
-        #tipoViaggio{
-            display: block;
-        }
-        .viaggio,.stato32{
-            display: block;
-        }
-        .direzione {
-            background-color:#fb8521;
-            border:1px solid #eeb44f;
-            display:inline-block;
-            color:#ffffff;
-            font: 15px/18px futura;
-            padding:3px 5px;
-            text-decoration:none;
-        }
-    .direzione:hover {
-	   background-color:#fb5510;
-    }
-    .direzione:active {
-	   position:relative;
-	   top:1px;
-    }
-    .direzione{
-      margin-top:10px;
-      margin-left:25px;
-        display: block;
-    }
-    .stato31{
-        display:inline-block;
-    }
-.contenuto{
-  width:100%;
 }

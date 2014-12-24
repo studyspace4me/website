@@ -13,7 +13,7 @@
     {% endblock %}
 </head>
 <body>
-<div class="off-canvas-wrap" data-offcanvas>
+<div class="off-canvas-wrap" data-offcanvas ng-app="customInterpolationApp" ng-controller="dashboardController">
     <div class="inner-wrap">
         <nav class="tab-bar">
             <section class="left">
@@ -32,7 +32,7 @@
         <aside class="left-off-canvas-menu">
             <ul class="off-canvas-list">
                 <li id="dashboardButton"><a href="{{ request.route_url('dashboard') }}">Dashboard</a></li>
-                <li id="preferencesButton"><a href="{{ request.route_url('preferences') }}">Preferences</a></li>
+                {#<li id="preferencesButton"><a href="{{ request.route_url('preferences') }}">Preferences</a></li>#}
                 <li id="contributeButton"><a href="{{ request.route_url('contribute') }}">Contribute</a></li>
                 <li id="termsofuseButton"><a href="{{ request.route_url('terms') }}">Terms of use</a></li>
             </ul>
@@ -40,7 +40,6 @@
 
         <section class="main-section">
             <div class="main-content">
-                <br>
                 {% block content %}{% endblock %}
                 <a class="exit-off-canvas"></a>
             </div>
