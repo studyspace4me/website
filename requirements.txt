@@ -1,0 +1,10 @@
+cornice==0.17
+Jinja2==2.7.3
+pymongo==2.7.2
+pyramid==1.5.2
+pyramid-jinja2==2.3.3
+redis==2.10.3
+requests==2.5.0
+uWSGI==2.0.8
+waitress==0.8.9
+./

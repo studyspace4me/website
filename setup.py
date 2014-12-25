@@ -12,9 +12,7 @@ requires = ['pyramid',
             'pyramid_debugtoolbar',
             'cornice',
             'waitress',
-            'pymongo',
-            'agendadisi',
-            'celery']
+            'pymongo']
 
 setup(name='website',
       version='1.0.0',
