@@ -1,15 +1,16 @@
 from datetime import datetime, timedelta, date, time
 import random
 from cornice import Service
+from website import settings
 from website.utils import format_time_momentjs
 from pymongo import MongoClient
 from bson.json_util import dumps, loads
 
-client = MongoClient()
-mongodb = client.ss4me
+client = MongoClient(settings.MONGODB['url'])
+mongodb = client[settings.MONGODB['db']]
 
 rooms = Service(name='rooms', path='/api/rooms/', description='Room status')
-preferences = Service(name='preferences', path='/api/prefs/', description='User preferences')
+# preferences = Service(name='preferences', path='/api/prefs/', description='User preferences')
 
 feedback = ["Empty", "Half", "Full"]
 
